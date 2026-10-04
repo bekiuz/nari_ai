@@ -1,0 +1,6 @@
+{
+  "name": "Nari AI",
+  "description": "Premium dark futuristic AI assistant powered by Google Gemini with multimodal image analysis, smart file intelligence, and sleek glassmorphic UI.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

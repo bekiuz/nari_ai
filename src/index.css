@@ -1,0 +1,210 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-primary: #06040b;
+    --bg-secondary: #0b0716;
+    --bg-card: rgba(18, 12, 30, 0.7);
+    --border-subtle: rgba(139, 92, 246, 0.14);
+    --border-glow: rgba(236, 72, 153, 0.3);
+    --accent-glow: #ec4899;
+  }
+
+  body {
+    background-color: var(--bg-primary);
+    color: #f1f5f9;
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  code, pre, .font-mono {
+    font-family: 'JetBrains Mono', monospace;
+  }
+
+  /* Accessible focus indicators */
+  :focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(236, 72, 153, 0.5);
+  }
+}
+
+/* Custom Glassmorphism */
+.glass-panel {
+  background: rgba(12, 8, 22, 0.75);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(139, 92, 246, 0.16);
+}
+
+.glass-card {
+  background: rgba(16, 10, 28, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(139, 92, 246, 0.16);
+}
+
+.glass-card-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.glass-card-hover:hover {
+  background: rgba(24, 15, 42, 0.8);
+  border-color: rgba(236, 72, 153, 0.35);
+  transform: translateY(-1px);
+}
+
+.glass-input {
+  background: rgba(14, 9, 24, 0.88);
+  backdrop-filter: blur(14px);
+  border: 1px solid rgba(139, 92, 246, 0.2);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(8, 5, 14, 0.4);
+}
+
+::-webkit-scrollbar-thumb {
+  background: rgba(139, 92, 246, 0.22);
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(236, 72, 153, 0.4);
+}
+
+/* Smooth keyframes */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes nariPulseGlow {
+  0%, 100% {
+    opacity: 0.5;
+    transform: scale(0.98);
+  }
+  50% {
+    opacity: 0.9;
+    transform: scale(1.02);
+  }
+}
+
+.animate-nari-pulse {
+  animation: nariPulseGlow 3s infinite ease-in-out;
+}
+
+/* Markdown typography styling */
+.markdown-body {
+  color: #e2e8f0;
+  line-height: 1.68;
+}
+
+.markdown-body p {
+  margin-bottom: 0.85rem;
+}
+
+.markdown-body p:last-child {
+  margin-bottom: 0;
+}
+
+.markdown-body h1, .markdown-body h2, .markdown-body h3, .markdown-body h4 {
+  color: #f8fafc;
+  font-weight: 600;
+  margin-top: 1.25rem;
+  margin-bottom: 0.6rem;
+  line-height: 1.35;
+}
+
+.markdown-body h1 { font-size: 1.4rem; }
+.markdown-body h2 { font-size: 1.2rem; }
+.markdown-body h3 { font-size: 1.05rem; }
+
+.markdown-body ul, .markdown-body ol {
+  margin-top: 0.4rem;
+  margin-bottom: 0.85rem;
+  padding-left: 1.35rem;
+}
+
+.markdown-body ul {
+  list-style-type: disc;
+}
+
+.markdown-body ol {
+  list-style-type: decimal;
+}
+
+.markdown-body li {
+  margin-bottom: 0.3rem;
+}
+
+.markdown-body blockquote {
+  border-left: 2.5px solid #ec4899;
+  padding-left: 1rem;
+  margin: 0.85rem 0;
+  color: #cbd5e1;
+  font-style: italic;
+  background: rgba(236, 72, 153, 0.04);
+  border-radius: 0 4px 4px 0;
+  padding-top: 0.35rem;
+  padding-bottom: 0.35rem;
+}
+
+.markdown-body table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.88rem;
+}
+
+.markdown-body th, .markdown-body td {
+  border: 1px solid rgba(139, 92, 246, 0.18);
+  padding: 0.5rem 0.85rem;
+  text-align: left;
+}
+
+.markdown-body th {
+  background: rgba(22, 14, 38, 0.85);
+  color: #f472b6;
+  font-weight: 600;
+}
+
+.markdown-body tr:nth-child(even) {
+  background: rgba(14, 9, 24, 0.45);
+}
+
+.markdown-body code:not(pre code) {
+  background: rgba(139, 92, 246, 0.14);
+  color: #f472b6;
+  padding: 0.15rem 0.35rem;
+  border-radius: 0.25rem;
+  font-size: 0.85em;
+  border: 1px solid rgba(236, 72, 153, 0.18);
+}
+
+.markdown-body a {
+  color: #f472b6;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.15s ease;
+}
+
+.markdown-body a:hover {
+  color: #fb7185;
+}

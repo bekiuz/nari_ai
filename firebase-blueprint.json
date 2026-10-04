@@ -1,0 +1,145 @@
+{
+  "entities": {
+    "User": {
+      "title": "User",
+      "description": "User profile document",
+      "type": "object",
+      "properties": {
+        "uid": { "type": "string", "maxLength": 128 },
+        "email": { "type": "string", "maxLength": 256 },
+        "displayName": { "type": "string", "maxLength": 128 },
+        "photoURL": { "type": "string", "maxLength": 2048 },
+        "createdAt": { "type": "string" },
+        "updatedAt": { "type": "string" }
+      },
+      "required": ["uid", "email"]
+    },
+    "Chat": {
+      "title": "Chat",
+      "description": "Conversation thread belonging to a user",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "title": { "type": "string", "maxLength": 256 },
+        "model": { "type": "string", "maxLength": 64 },
+        "pinned": { "type": "boolean" },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "userId", "title"]
+    },
+    "Message": {
+      "title": "Message",
+      "description": "Message in a conversation",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "chatId": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "role": { "type": "string", "enum": ["user", "model"] },
+        "content": { "type": "string", "maxLength": 500000 },
+        "status": { "type": "string", "enum": ["sending", "streaming", "complete", "error"] },
+        "error": { "type": "string", "maxLength": 1024 },
+        "timestamp": { "type": "number" }
+      },
+      "required": ["id", "chatId", "userId", "role", "content", "timestamp"]
+    },
+    "Memory": {
+      "title": "Memory",
+      "description": "Long-term remembered user fact or preference",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "content": { "type": "string", "maxLength": 2048 },
+        "category": { "type": "string", "maxLength": 64 },
+        "importance": { "type": "number" },
+        "source": { "type": "string", "maxLength": 256 },
+        "createdAt": { "type": "number" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["id", "userId", "content", "createdAt"]
+    },
+    "FileRecord": {
+      "title": "FileRecord",
+      "description": "Uploaded user document or file metadata",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 256 },
+        "type": { "type": "string", "maxLength": 32 },
+        "mimeType": { "type": "string", "maxLength": 128 },
+        "size": { "type": "number" },
+        "textPreview": { "type": "string", "maxLength": 500000 },
+        "chatId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "userId", "name", "size", "createdAt"]
+    },
+    "ImageRecord": {
+      "title": "ImageRecord",
+      "description": "Uploaded image metadata and storage reference",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "maxLength": 128 },
+        "userId": { "type": "string", "maxLength": 128 },
+        "name": { "type": "string", "maxLength": 256 },
+        "type": { "type": "string", "maxLength": 32 },
+        "mimeType": { "type": "string", "maxLength": 128 },
+        "size": { "type": "number" },
+        "dataUrl": { "type": "string", "maxLength": 1000000 },
+        "chatId": { "type": "string", "maxLength": 128 },
+        "createdAt": { "type": "number" }
+      },
+      "required": ["id", "userId", "name", "size", "createdAt"]
+    },
+    "UserSettings": {
+      "title": "UserSettings",
+      "description": "User preferences and system configuration",
+      "type": "object",
+      "properties": {
+        "userId": { "type": "string", "maxLength": 128 },
+        "model": { "type": "string", "maxLength": 64 },
+        "temperature": { "type": "number" },
+        "systemPrompt": { "type": "string", "maxLength": 4096 },
+        "memoryEnabled": { "type": "boolean" },
+        "autoScroll": { "type": "boolean" },
+        "soundEffects": { "type": "boolean" },
+        "updatedAt": { "type": "number" }
+      },
+      "required": ["userId"]
+    }
+  },
+  "firestore": {
+    "/users/{userId}": {
+      "schema": "User",
+      "description": "User profile documents"
+    },
+    "/chats/{chatId}": {
+      "schema": "Chat",
+      "description": "Chat conversations"
+    },
+    "/chats/{chatId}/messages/{messageId}": {
+      "schema": "Message",
+      "description": "Messages inside a chat"
+    },
+    "/users/{userId}/memories/{memoryId}": {
+      "schema": "Memory",
+      "description": "Long-term memories for a user"
+    },
+    "/users/{userId}/files/{fileId}": {
+      "schema": "FileRecord",
+      "description": "Uploaded file records for a user"
+    },
+    "/users/{userId}/images/{imageId}": {
+      "schema": "ImageRecord",
+      "description": "Uploaded image records for a user"
+    },
+    "/users/{userId}/settings/{settingsId}": {
+      "schema": "UserSettings",
+      "description": "Personalized user settings"
+    }
+  }
+}

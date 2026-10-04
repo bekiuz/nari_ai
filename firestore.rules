@@ -1,0 +1,57 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // User profiles and all user-owned private subcollections
+    match /users/{userId} {
+      allow read, write: if isOwner(userId);
+
+      match /memories/{memoryId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /files/{fileId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /images/{imageId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /settings/{settingsId} {
+        allow read, write: if isOwner(userId);
+      }
+
+      match /{allSubcollections=**} {
+        allow read, write: if isOwner(userId);
+      }
+    }
+
+    // Top-level chats collection
+    match /chats/{chatId} {
+      allow create: if isSignedIn() &&
+        request.resource.data.userId == request.auth.uid;
+
+      allow read, delete: if isSignedIn() &&
+        resource.data.userId == request.auth.uid;
+
+      allow update: if isSignedIn() &&
+        resource.data.userId == request.auth.uid &&
+        request.resource.data.userId == request.auth.uid;
+
+      // Messages subcollection under a chat
+      match /messages/{messageId} {
+        allow read, write: if isSignedIn() &&
+          get(/databases/$(database)/documents/chats/$(chatId)).data.userId == request.auth.uid;
+      }
+    }
+  }
+}
