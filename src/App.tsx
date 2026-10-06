@@ -57,7 +57,7 @@ import {
   saveCloudUserSettings,
 } from './services/settingsService';
 import { DEFAULT_SETTINGS } from './utils/storage';
-import { NariLogo } from './components/ZuxrashLogo';
+import { ZuxrashLogo } from './components/ZuxrashLogo';
 import { liveVoiceService } from './services/liveVoiceService';
 
 export default function App() {
