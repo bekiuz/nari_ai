@@ -96,7 +96,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onSuccess }) => {
           </div>
           <div className="flex items-center gap-1.5">
             <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
-              {isRegister ? 'Create Account' : 'Welcome to Nari'}
+              {isRegister ? 'Create Account' : 'Welcome to Zuxrash'}
             </span>
             <span className="text-xl sm:text-2xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent">
               AI
