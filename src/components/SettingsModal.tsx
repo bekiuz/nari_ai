@@ -33,7 +33,7 @@ interface SettingsPanelProps {
 }
 
 const SUPPORTED_VOICES: Array<{ id: GeminiVoiceName; label: string; desc: string }> = [
-  { id: 'Zephyr', label: 'Zephyr', desc: 'Balanced, futuristic & intelligent (Recommended for Nari)' },
+  { id: 'Zephyr', label: 'Zephyr', desc: 'Balanced, futuristic & intelligent (Recommended for Zuxrash)' },
   { id: 'Puck', label: 'Puck', desc: 'Energetic, upbeat & engaging' },
   { id: 'Charon', label: 'Charon', desc: 'Deep, calm & authoritative' },
   { id: 'Kore', label: 'Kore', desc: 'Smooth, warm & conversational' },
@@ -92,7 +92,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
   };
   const handleExportData = () => {
     const exportPayload = {
-      app: 'Nari AI',
+      app: 'Zuxrash',
       exportedAt: new Date().toISOString(),
       user: currentUser?.email,
       settings,
@@ -104,7 +104,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
     const url = URL.createObjectURL(blob);
     const a = document.createElement('a');
     a.href = url;
-    a.download = `nari-ai-export-${new Date().toISOString().slice(0, 10)}.json`;
+    a.download = `zuxrash-export-${new Date().toISOString().slice(0, 10)}.json`;
     a.click();
     URL.revokeObjectURL(url);
   };
@@ -118,7 +118,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           <h2 className="text-xl font-bold text-white tracking-tight">System & AI Settings</h2>
         </div>
         <p className="text-xs text-slate-400 mt-1">
-          Configure model intelligence, continuous memory, temperature dynamics, and system instructions for Nari AI.
+          Configure model intelligence, continuous memory, temperature dynamics, and system instructions for Zuxrash.
         </p>
       </div>
 
@@ -369,7 +369,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
             onClick={() =>
               onUpdateSettings({
                 systemPrompt:
-                  'You are Nari AI, an advanced, highly intelligent futuristic AI assistant. ' +
+                  'You are Zuxrash, an advanced, highly intelligent futuristic AI assistant. ' +
                   'Provide articulate, accurate, elegant responses. Format code with language specifiers. ' +
                   'Be observant and insightful with images and uploaded files.',
               })
@@ -386,11 +386,11 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
           value={settings.systemPrompt}
           onChange={(e) => onUpdateSettings({ systemPrompt: e.target.value })}
           className="w-full p-3.5 bg-[#080511] border border-[#22153a] rounded-xl text-xs text-slate-200 focus:outline-none focus:border-pink-500/50 leading-relaxed font-mono resize-none"
-          placeholder="Enter system prompt for Nari AI..."
+          placeholder="Enter system prompt for Zuxrash..."
           aria-label="System prompt textarea"
         />
         <p className="text-[11px] text-slate-500">
-          This instruction steers Nari AI’s tone, demeanor, reasoning method, and code conventions across all chats.
+          This instruction steers Zuxrash’s tone, demeanor, reasoning method, and code conventions across all chats.
         </p>
       </div>
 
