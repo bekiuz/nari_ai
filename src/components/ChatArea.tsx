@@ -188,7 +188,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
       {/* Chat Messages Viewport */}
       <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-6">
         {isEmptyChat ? (
-          /* Premium Nari AI Welcome Screen */
+          /* Premium Zuxrash Welcome Screen */
           <div className="max-w-3xl mx-auto py-10 md:py-16 flex flex-col items-center text-center space-y-8 animate-fadeIn">
             {/* Minimalist Abstract Nari Brand Mark */}
             <div className="relative group">
@@ -199,7 +199,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
             <div className="space-y-3 max-w-xl mx-auto">
               <div className="flex items-center justify-center gap-2">
                 <span className="text-3xl md:text-4xl font-bold tracking-tight text-white">
-                  Nari
+                  Zuxrash
                 </span>
                 <span className="text-3xl md:text-4xl font-extrabold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent">
                   AI
@@ -626,7 +626,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     </div>
                   ) : (
                     <span className="text-xs text-slate-400 font-mono">
-                      Nari AI is formulating response...
+                      Zuxrash AI is formulating response...
                     </span>
                   )}
                 </div>
