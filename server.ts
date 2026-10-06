@@ -222,13 +222,13 @@ app.post('/api/chat', requireAuth, async (req: Request, res: Response) => {
     });
 
     const defaultSystemPrompt =
-      'You are Nari AI, an advanced, highly intelligent futuristic AI assistant. ' +
+      'You are Zuxrash, an advanced, highly intelligent futuristic AI assistant. ' +
       'You communicate with clarity, precision, and elegance. ' +
       'Format code blocks properly with language tags. Use structured Markdown with bolding, lists, and tables where helpful. ' +
       'When analyzing images or files, be thorough, observant, and insightful. If given code, provide clean, idiomatic, bug-free solutions.';
 
     const voiceCapabilityDirective =
-      'Nari AI System Capabilities: You are fully integrated with real-time bidirectional Voice Mode powered by Google Gemini Live (gemini-3.8-live) and Read Aloud powered by Gemini TTS (gemini-3.8-flash-tts). ' +
+      'Zuxrash System Capabilities: You are fully integrated with real-time bidirectional Voice Mode powered by Google Gemini Live (gemini-3.8-live) and Read Aloud powered by Gemini TTS (gemini-3.8-flash-tts). ' +
       'Real-time voice chat IS active and available in this app right now. If the user asks whether voice chat is available, how to talk to you, or requests voice mode, confirm that real-time voice mode is active and instruct them to click the microphone / Voice Mode button beside the chat composer to start a real-time voice conversation with you.';
 
     // Generate real runtime clock context for every request
@@ -412,7 +412,7 @@ app.post('/api/chat', requireAuth, async (req: Request, res: Response) => {
           )}). Returning explicit user-facing search quota notice (no silent fallback).`
         );
         const searchQuotaNotice =
-          'Web Search is temporarily unavailable because the search quota was exceeded. Please retry in a few moments, or toggle Web Search OFF to ask Nari AI using standard model knowledge.';
+          'Web Search is temporarily unavailable because the search quota was exceeded. Please retry in a few moments, or toggle Web Search OFF to ask Zuxrash using standard model knowledge.';
         res.write(`data: ${JSON.stringify({ error: searchQuotaNotice, webSearchUnavailable: true })}\n\n`);
         return res.end();
       }
@@ -468,7 +468,7 @@ app.post('/api/chat', requireAuth, async (req: Request, res: Response) => {
       if (webSearch) {
         return res.status(429).json({
           error:
-            'Web Search is temporarily unavailable because the search quota was exceeded. Please retry in a few moments, or toggle Web Search OFF to ask Nari AI using standard model knowledge.',
+            'Web Search is temporarily unavailable because the search quota was exceeded. Please retry in a few moments, or toggle Web Search OFF to ask Zuxrash using standard model knowledge.',
           webSearchUnavailable: true,
         });
       }
@@ -562,7 +562,7 @@ app.post('/api/memory/extract', requireAuth, async (req: Request, res: Response)
       (assistantReply ? `Assistant response: "${assistantReply}"\n` : '') +
       '\nSTRICT RULES:\n' +
       '1. Save ONLY information that is EXPLICITLY stated by the user or unmistakably established. Never infer, assume, extrapolate, or guess.\n' +
-      '2. NEVER infer personal nicknames, preferred names, tone personas, or relationship roles unless the user explicitly said "call me [name]" or "my name is [name]". For example, never save "the user wants to be called Nari-chan" or "the user is a student" unless stated word-for-word.\n' +
+      '2. NEVER infer personal nicknames, preferred names, tone personas, or relationship roles unless the user explicitly said "call me [name]" or "my name is [name]". For example, never save "the user wants to be called Zuxrash" or "the user is a student" unless stated word-for-word.\n' +
       '3. Ignore transient search questions, temporary coding debugging, one-off tasks, and fleeting conversation pleasantries.\n' +
       '4. If no explicit, enduring personal fact was stated by the user, return hasMemory: false.\n' +
       '5. If an explicit fact was provided, state it objectively and factually in one clear sentence (e.g., "User works as a software engineer in Tashkent.").';
@@ -683,7 +683,7 @@ app.post('/api/voice/preview', requireAuth, async (req: Request, res: Response) 
     const chosenVoice = allowedVoices.includes(voiceName) ? voiceName : 'Zephyr';
 
     const ai = getGenAIClient();
-    const previewText = `Hello! I am Nari AI, speaking with the ${chosenVoice} voice.`;
+    const previewText = `Hello! I am Zuxrash, speaking with the ${chosenVoice} voice.`;
 
     const response = await ai.models.generateContent({
       model: 'gemini-3.8-flash-tts',
@@ -754,7 +754,7 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
           });
 
           let systemPrompt =
-            'You are Nari AI, an intelligent, futuristic, warm voice companion. ' +
+            'You are Zuxrash, an intelligent, futuristic, warm voice companion. ' +
             'You are speaking in a natural real-time voice conversation. ' +
             'Keep your responses spoken, natural, concise, and conversational (usually 1-3 sentences). ' +
             'Avoid reciting large codeblocks, markdown tables, or raw URLs out loud unless asked. ' +
@@ -773,7 +773,7 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
             const historyText = msg.recentMessages
               .filter((m: any) => m && m.content)
               .slice(-8)
-              .map((m: any) => `${m.role === 'user' ? 'User' : 'Nari'}: ${m.content}`)
+              .map((m: any) => `${m.role === 'user' ? 'User' : 'Zuxrash'}: ${m.content}`)
               .join('\n');
             if (historyText) {
               systemPrompt += `\n\nRecent context from this active conversation:\n${historyText}\n(Continue conversation seamlessly from here without repeating previous greetings)`;
@@ -953,7 +953,7 @@ async function startServer() {
   setupLiveWebSocketServer(server);
 
   server.listen(PORT, '0.0.0.0', () => {
-    console.log(`[Nari AI] Server listening on port ${PORT} (mode: ${isProd ? 'production' : 'development'})`);
+    console.log(`[Zuxrash] Server listening on port ${PORT} (mode: ${isProd ? 'production' : 'development'})`);
   });
 }
 
