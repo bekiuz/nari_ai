@@ -14,7 +14,7 @@ import {
   Square,
   MessageSquare,
 } from 'lucide-react';
-import { NariLogo } from './NariLogo';
+import { NariLogo } from './ZuxrashLogo';
 import { GeminiVoiceName, Memory, Conversation } from '../types/chat';
 import { liveVoiceService, LiveVoiceState } from '../services/liveVoiceService';
 
@@ -185,7 +185,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
       <header className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-4 border-b border-purple-900/20 bg-[#08050e]/70 backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <NariLogo size={28} />
+            <ZuxrashLogo size={28} />
             <span className="font-semibold text-sm tracking-tight text-white">Zuxrash Voice</span>
           </div>
           <div className="h-4 w-px bg-purple-800/40 hidden sm:block" />
@@ -348,7 +348,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
                 : 'shadow-md ring-1 ring-purple-900/30'
             } bg-[#0c0716]/90 backdrop-blur-xl`}
           >
-            <NariLogo size={90} withGlow={state === 'speaking' || state === 'listening'} />
+            <ZuxrashLogo size={90} withGlow={state === 'speaking' || state === 'listening'} />
           </div>
         </div>
 
@@ -379,7 +379,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
                   }`}
                 >
                   <span className="text-[9px] font-mono uppercase tracking-wider block mb-0.5 opacity-60">
-                    {turn.role === 'user' ? 'You' : 'Nari'}
+                    {turn.role === 'user' ? 'You' : 'Zuxrash'}
                   </span>
                   {turn.text}
                 </div>
@@ -398,7 +398,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
               </div>
             )}
 
-            {/* In-progress Nari Spoken Text */}
+            {/* In-progress Zuxrash Spoken Text */}
             {liveModelText && (
               <div className="flex justify-start">
                 <div className="px-3 py-1.5 rounded-xl max-w-[85%] bg-[#1a0f30] text-pink-200 border border-pink-500/40">
@@ -433,7 +433,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
             <button
               onClick={handleInterrupt}
               className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-purple-950/80 hover:bg-purple-900 border border-purple-600/60 text-purple-200 flex items-center justify-center transition-all cursor-pointer shadow-lg animate-pulse"
-              title="Stop Nari from speaking"
+              title="Stop Zuxrash from speaking"
               aria-label="Interrupt speech"
             >
               <Square className="w-5 h-5 fill-current" />
