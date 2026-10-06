@@ -90,7 +90,7 @@ export const MemoryManager: React.FC<MemoryManagerProps> = ({
             <h2 className="text-xl font-bold text-white tracking-tight">Long-Term Memory Hub</h2>
           </div>
           <p className="text-xs text-slate-400 mt-1">
-            Nari AI automatically remembers meaningful facts and preferences across all conversations.
+            Zuxrash automatically remembers meaningful facts and preferences across all conversations.
           </p>
         </div>
 
@@ -216,7 +216,7 @@ export const MemoryManager: React.FC<MemoryManagerProps> = ({
           </div>
           <h3 className="text-base font-semibold text-white">No memories saved yet</h3>
           <p className="text-xs text-slate-400 max-w-md">
-            As you converse with Nari AI, permanent preferences and context are automatically detected and preserved here.
+            As you converse with Zuxrash, permanent preferences and context are automatically detected and preserved here.
           </p>
         </div>
       ) : (
