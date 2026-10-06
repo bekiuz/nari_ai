@@ -262,7 +262,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
   }
 
   return (
-    <div className="p-3 md:p-5 bg-gradient-to-t from-[#06040b] via-[#06040b]/95 to-transparent shrink-0">
+    <div className="zuxrash-composer p-3 md:p-5 shrink-0">
       <div className="max-w-4xl mx-auto w-full">
         {/* Attachment preview strip */}
         {attachments.length > 0 && (
@@ -310,7 +310,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
 
         {/* Floating Glass Input Panel */}
         <div
-          className={`rounded-2xl p-2.5 md:p-3 flex flex-col gap-2 transition-all duration-200 bg-[#0e0a1a]/90 backdrop-blur-xl border ${
+          className={`zuxrash-composer-panel rounded-2xl p-2.5 md:p-3 flex flex-col gap-2 transition-all duration-200 backdrop-blur-xl ${
             isWebSearchActive
               ? 'border-pink-500/35 shadow-lg shadow-pink-500/10'
               : 'border-[#221639] focus-within:border-purple-600/50 shadow-md'
