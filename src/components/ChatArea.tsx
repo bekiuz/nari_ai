@@ -25,7 +25,7 @@ import { Conversation, Message, Attachment, GroundingSource, GeminiVoiceName } f
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { ChatHeader } from './ChatHeader';
 import { ChatInput } from './ChatInput';
-import { NariLogo } from './ZuxrashLogo';
+import { ZuxrashLogo } from './ZuxrashLogo';
 import { ttsService, TTSStatus } from '../services/ttsService';
 
 interface ChatAreaProps {
