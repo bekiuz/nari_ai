@@ -9,7 +9,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { Conversation } from '../types/chat';
-import { NariLogo } from './ZuxrashLogo';
+import { ZuxrashLogo } from './ZuxrashLogo';
 
 interface ChatHeaderProps {
   chat: Conversation | null;
