@@ -14,7 +14,7 @@ import {
   Square,
   MessageSquare,
 } from 'lucide-react';
-import { NariLogo } from './ZuxrashLogo';
+import { ZuxrashLogo } from './ZuxrashLogo';
 import { GeminiVoiceName, Memory, Conversation } from '../types/chat';
 import { liveVoiceService, LiveVoiceState } from '../services/liveVoiceService';
 
