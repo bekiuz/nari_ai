@@ -46,9 +46,9 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
 
   const handleExportMarkdown = () => {
     if (!chat) return;
-    let md = `# ${chat.title}\n*Exported from Nari AI - ${new Date().toLocaleString()}*\n\n---\n\n`;
+    let md = `# ${chat.title}\n*Exported from Zuxrash - ${new Date().toLocaleString()}*\n\n---\n\n`;
     chat.messages.forEach((m) => {
-      const author = m.role === 'user' ? 'User' : 'Nari AI';
+      const author = m.role === 'user' ? 'User' : 'Zuxrash';
       const time = new Date(m.timestamp).toLocaleTimeString();
       md += `### ${author} (${time})\n\n${m.content}\n\n`;
       if (m.attachments && m.attachments.length > 0) {
