@@ -81,14 +81,14 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onSuccess }) => {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-[#050309]/90 backdrop-blur-xl">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 zuxrash-shell bg-[#050309]/90 backdrop-blur-xl">
       {/* Background ambient lighting */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div className="absolute top-1/4 left-1/3 w-96 h-96 rounded-full bg-purple-900/15 blur-[130px]" />
         <div className="absolute bottom-1/4 right-1/3 w-96 h-96 rounded-full bg-pink-900/15 blur-[130px]" />
       </div>
 
-      <div className="relative w-full max-w-md bg-[#0c0818] rounded-3xl p-6 sm:p-8 border border-[#24173d] shadow-2xl flex flex-col space-y-6">
+      <div className="relative w-full max-w-md bg-[#0c0818]/92 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 border border-purple-500/20 shadow-2xl shadow-purple-950/30 flex flex-col space-y-6">
         {/* Logo and Header */}
         <div className="flex flex-col items-center text-center space-y-2.5">
           <div className="mb-1">
