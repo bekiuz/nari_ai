@@ -1,15 +1,15 @@
 import { Conversation, UserSettings, UploadedMediaItem } from '../types/chat';
 
-const CHATS_STORAGE_KEY = 'nari_ai_chats_v1';
-const ACTIVE_CHAT_KEY = 'nari_ai_active_chat_id_v1';
-const SETTINGS_STORAGE_KEY = 'nari_ai_settings_v1';
-const MEDIA_STORAGE_KEY = 'nari_ai_media_items_v1';
+const CHATS_STORAGE_KEY = 'zuxrash_chats_v1';
+const ACTIVE_CHAT_KEY = 'zuxrash_active_chat_id_v1';
+const SETTINGS_STORAGE_KEY = 'zuxrash_settings_v1';
+const MEDIA_STORAGE_KEY = 'zuxrash_media_items_v1';
 
 export const DEFAULT_SETTINGS: UserSettings = {
   model: 'gemini-3.8-flash',
   temperature: 0.7,
   systemPrompt:
-    'You are Nari AI, an advanced, highly intelligent futuristic AI assistant equipped with real-time bidirectional Voice Mode (Google Gemini Live gemini-3.8-live) and Read Aloud (Gemini TTS gemini-3.8-flash-tts). ' +
+    'You are Zuxrash, an advanced, highly intelligent futuristic AI assistant equipped with real-time bidirectional Voice Mode (Google Gemini Live gemini-3.8-live) and Read Aloud (Gemini TTS gemini-3.8-flash-tts). ' +
     'Provide articulate, accurate, elegant responses. Format code with language specifiers. ' +
     'Be observant and insightful with images and uploaded files. Real-time voice mode IS active and can be launched using the microphone button in the composer.',
   memoryEnabled: true,
@@ -29,7 +29,7 @@ export const DEFAULT_SETTINGS: UserSettings = {
 export const INITIAL_CONVERSATION: Conversation = {
   id: 'conv-initial-welcome',
   userId: 'system',
-  title: 'Welcome to Nari AI',
+  title: 'Welcome to Zuxrash',
   createdAt: Date.now() - 1000 * 60 * 5,
   updatedAt: Date.now() - 1000 * 60 * 5,
   pinned: true,
@@ -41,8 +41,8 @@ export const INITIAL_CONVERSATION: Conversation = {
       userId: 'system',
       role: 'model',
       content:
-        `# Welcome to Nari AI ✨\n\n` +
-        `I am **Nari AI**, your futuristic multimodal AI assistant powered directly by **Google Gemini**.\n\n` +
+        `# Welcome to Zuxrash ✨\n\n` +
+        `I am **Zuxrash**, your futuristic multimodal AI assistant powered directly by **Google Gemini**.\n\n` +
         `### Key Capabilities:\n` +
         `- **Real-Time Voice Mode**: Click the **Voice Mode** microphone button in the chat composer to start a real-time bidirectional conversation powered by **Google Gemini Live (gemini-3.8-live)**.\n` +
         `- **Gemini Read Aloud**: Click the speaker icon on any message to listen to natural speech powered by **Gemini TTS (gemini-3.8-flash-tts)**.\n` +
