@@ -168,7 +168,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
   const isEmptyChat = messages.length === 0;
 
   return (
-    <div className="flex-1 flex flex-col h-full bg-[#06040b] relative overflow-hidden">
+    <div className="flex-1 flex flex-col h-full bg-transparent relative overflow-hidden">
       {/* Subtle atmospheric backdrop lighting */}
       <div className="absolute inset-0 pointer-events-none opacity-30 overflow-hidden" aria-hidden="true">
         <div className="absolute -top-32 right-1/4 w-[500px] h-[500px] rounded-full bg-purple-900/10 blur-[140px]" />
@@ -186,7 +186,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
       />
 
       {/* Chat Messages Viewport */}
-      <div className="flex-1 overflow-y-auto px-4 md:px-8 py-6 space-y-6">
+      <div className="relative z-10 flex-1 overflow-y-auto px-4 sm:px-6 md:px-8 py-5 md:py-6 space-y-6">
         {isEmptyChat ? (
           /* Premium Zuxrash Welcome Screen */
           <div className="max-w-3xl mx-auto py-10 md:py-16 flex flex-col items-center text-center space-y-8 animate-fadeIn">
@@ -218,7 +218,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     'What are the latest scientific and technological breakthroughs this week? Provide verified facts with sources.'
                   )
                 }
-                className="group p-4 rounded-2xl bg-[#0d0918]/80 hover:bg-[#150f26] border border-[#211536] hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
+                className="group glass-card glass-card-hover p-4 rounded-2xl hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
                 role="button"
                 tabIndex={0}
               >
@@ -241,7 +241,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     'Analyze the pros and cons of event-driven vs microkernel architecture in cloud-native applications with code examples.'
                   )
                 }
-                className="group p-4 rounded-2xl bg-[#0d0918]/80 hover:bg-[#150f26] border border-[#211536] hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
+                className="group glass-card glass-card-hover p-4 rounded-2xl hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
                 role="button"
                 tabIndex={0}
               >
@@ -264,7 +264,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     'Provide a step-by-step checklist for optimizing React 19 rendering performance and eliminating component bottlenecks.'
                   )
                 }
-                className="group p-4 rounded-2xl bg-[#0d0918]/80 hover:bg-[#150f26] border border-[#211536] hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
+                className="group glass-card glass-card-hover p-4 rounded-2xl hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
                 role="button"
                 tabIndex={0}
               >
@@ -287,7 +287,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     'Write a complete Python script to load a CSV dataset, compute descriptive statistics, and output key insights.'
                   )
                 }
-                className="group p-4 rounded-2xl bg-[#0d0918]/80 hover:bg-[#150f26] border border-[#211536] hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
+                className="group glass-card glass-card-hover p-4 rounded-2xl hover:border-pink-500/40 transition-all duration-200 cursor-pointer shadow-sm"
                 role="button"
                 tabIndex={0}
               >
