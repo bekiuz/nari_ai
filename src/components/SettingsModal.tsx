@@ -124,7 +124,7 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
 
       {/* Account Info */}
       {currentUser && (
-        <div className="bg-[#0c0817] border border-[#1f1533] rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div className="glass-card rounded-2xl p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
           <div className="flex items-center gap-3.5">
             <div className="w-11 h-11 rounded-xl bg-[#160e28] border border-purple-800/40 flex items-center justify-center text-pink-300 overflow-hidden shadow-sm">
               {currentUser.photoURL ? (
