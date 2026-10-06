@@ -1,6 +1,6 @@
-# Nari AI — Futuristic AI Assistant with Cloud Backend & Long-Term Memory
+# Zuxrash — Futuristic AI Assistant with Cloud Backend & Long-Term Memory
 
-Nari AI is a full-stack, futuristic AI assistant web application featuring a sleek dark glassmorphic interface, powered by Google Gemini API (`gemini-3.8-flash`, `gemini-3.1-flash-lite`, & `gemini-3.1-pro-preview`) with a real cloud database and authentication backend.
+Zuxrash is a full-stack, futuristic AI assistant web application featuring a sleek dark glassmorphic interface, powered by Google Gemini API (`gemini-3.8-flash`, `gemini-3.1-flash-lite`, & `gemini-3.1-pro-preview`) with a real cloud database and authentication backend.
 
 ## ✨ Upgraded Features
 
