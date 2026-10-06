@@ -126,7 +126,7 @@ export default function App() {
           isInitialLoadRef.current = false;
           let savedId: string | null = null;
           try {
-            savedId = localStorage.getItem('nari_active_chat_id');
+            savedId = localStorage.getItem('zuxrash_active_chat_id');
           } catch (_) {}
 
           if (savedId && chats.some((c) => c.id === savedId)) {
@@ -134,7 +134,7 @@ export default function App() {
           } else if (chats.length > 0) {
             setActiveChatId(chats[0].id);
             try {
-              localStorage.setItem('nari_active_chat_id', chats[0].id);
+              localStorage.setItem('zuxrash_active_chat_id', chats[0].id);
             } catch (_) {}
           } else {
             setActiveChatId(null);
@@ -241,7 +241,7 @@ export default function App() {
     setStagedAttachments([]);
     setActiveView('chats');
     try {
-      localStorage.setItem('nari_active_chat_id', id);
+      localStorage.setItem('zuxrash_active_chat_id', id);
     } catch (_) {}
   };
 
@@ -257,7 +257,7 @@ export default function App() {
     setStagedAttachments([]);
     setActiveView('chats');
     try {
-      localStorage.removeItem('nari_active_chat_id');
+      localStorage.removeItem('zuxrash_active_chat_id');
     } catch (_) {}
   };
 
@@ -349,7 +349,7 @@ export default function App() {
         targetChatId = created.id;
         setActiveChatId(created.id);
         try {
-          localStorage.setItem('nari_active_chat_id', created.id);
+          localStorage.setItem('zuxrash_active_chat_id', created.id);
         } catch (_) {}
       } catch (err) {
         console.error('Failed to create chat in Firestore:', err);
