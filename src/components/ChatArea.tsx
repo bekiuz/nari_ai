@@ -25,7 +25,7 @@ import { Conversation, Message, Attachment, GroundingSource, GeminiVoiceName } f
 import { MarkdownRenderer } from './MarkdownRenderer';
 import { ChatHeader } from './ChatHeader';
 import { ChatInput } from './ChatInput';
-import { NariLogo } from './NariLogo';
+import { NariLogo } from './ZuxrashLogo';
 import { ttsService, TTSStatus } from '../services/ttsService';
 
 interface ChatAreaProps {
@@ -192,7 +192,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
           <div className="max-w-3xl mx-auto py-10 md:py-16 flex flex-col items-center text-center space-y-8 animate-fadeIn">
             {/* Minimalist Abstract Zuxrash Brand Mark */}
             <div className="relative group">
-              <NariLogo size={72} withGlow />
+              <ZuxrashLogo size={72} withGlow />
             </div>
 
             {/* Title & Editorial Subtitle */}
@@ -333,7 +333,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                   {/* AI Avatar on left: Minimalist Zuxrash Brand Emblem */}
                   {!isUser && (
                     <div className="shrink-0 mt-1">
-                      <NariLogo size={30} />
+                      <ZuxrashLogo size={30} />
                     </div>
                   )}
 
@@ -611,7 +611,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
             {isLoading && (
               <div className="flex gap-3 md:gap-4 justify-start">
                 <div className="shrink-0 mt-1">
-                  <NariLogo size={30} withGlow />
+                  <ZuxrashLogo size={30} withGlow />
                 </div>
                 <div className="bg-[#0c0817] rounded-2xl rounded-tl-xs px-4 py-3 border border-[#1f1533] flex items-center gap-3">
                   <div className="flex items-center gap-1.5">
