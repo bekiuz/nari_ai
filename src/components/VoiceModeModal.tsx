@@ -428,7 +428,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
             {isMuted ? <MicOff className="w-5 h-5 sm:w-6 sm:h-6" /> : <Mic className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
 
-          {/* Interrupt Speaking Button (Visible when Nari is speaking) */}
+          {/* Interrupt Speaking Button (Visible when Zuxrash is speaking) */}
           {state === 'speaking' && (
             <button
               onClick={handleInterrupt}
