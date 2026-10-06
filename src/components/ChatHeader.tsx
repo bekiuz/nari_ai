@@ -74,7 +74,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
       : 'Gemini 3.8 Flash';
 
   return (
-    <header className="h-14 md:h-16 px-3.5 md:px-6 flex items-center justify-between border-b border-[#1f1533] bg-[#07050e]/90 backdrop-blur-xl shrink-0 z-30">
+    <header className="zuxrash-header h-14 md:h-16 px-3.5 md:px-6 flex items-center justify-between border-b border-[#1f1533]/80 backdrop-blur-xl shrink-0 z-30">
       <div className="flex items-center gap-2.5 sm:gap-3 min-w-0">
         {/* Mobile menu button */}
         <button
