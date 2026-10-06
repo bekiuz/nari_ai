@@ -10,7 +10,7 @@ interface NariLogoProps {
 }
 
 /**
- * Nari AI Brand Mark:
+ * Zuxrash Brand Mark:
  * An original, minimalist abstract "N" forged from flowing geometric neural ribbons.
  * Refined neon gradient: soft pink, violet, and subtle crimson on an obsidian base.
  * Fully scalable from 16px to 96px+.
@@ -131,7 +131,7 @@ export const NariLogo: React.FC<NariLogoProps> = ({
         <div className={`flex flex-col min-w-0 ${wordmarkClassName}`}>
           <div className="flex items-center gap-1.5 leading-none">
             <span className="font-semibold tracking-tight text-white text-[15px] sm:text-base">
-              Nari
+              Zuxrash
             </span>
             <span className="font-bold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent text-[14px] sm:text-[15px]">
               AI
