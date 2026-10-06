@@ -19,7 +19,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { Conversation, UserProfile } from '../types/chat';
-import { NariLogo } from './NariLogo';
+import { NariLogo } from './ZuxrashLogo';
 
 interface SidebarProps {
   conversations: Conversation[];
@@ -119,7 +119,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
             role="button"
             tabIndex={0}
           >
-            <NariLogo
+            <ZuxrashLogo
               size={isCollapsed ? 34 : 36}
               withGlow
               withWordmark={!isCollapsed}
