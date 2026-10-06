@@ -108,7 +108,7 @@ export const Sidebar: React.FC<SidebarProps> = ({
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
         } ${isCollapsed ? 'lg:w-[74px]' : 'w-72 lg:w-80'}`}
       >
-        {/* Brand Header with Nari AI Icon & Wordmark */}
+        {/* Brand Header with Zuxrash Icon & Wordmark */}
         <div className="flex items-center justify-between px-4 py-3.5 border-b border-[#1f1533]">
           <div
             onClick={() => {
@@ -365,12 +365,12 @@ export const Sidebar: React.FC<SidebarProps> = ({
             {/* Logout button */}
             <button
               onClick={() => {
-                if (window.confirm('Are you sure you want to log out of Nari AI?')) {
+                if (window.confirm('Are you sure you want to log out of Zuxrash?')) {
                   onLogout();
                 }
               }}
               className="p-1.5 rounded-lg text-slate-400 hover:text-rose-400 hover:bg-rose-950/30 transition-colors cursor-pointer shrink-0"
-              title="Log out of Nari AI"
+              title="Log out of Zuxrash"
               aria-label="Log out"
             >
               <LogOut className="w-4 h-4" />
