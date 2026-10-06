@@ -190,7 +190,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
         {isEmptyChat ? (
           /* Premium Zuxrash Welcome Screen */
           <div className="max-w-3xl mx-auto py-10 md:py-16 flex flex-col items-center text-center space-y-8 animate-fadeIn">
-            {/* Minimalist Abstract Nari Brand Mark */}
+            {/* Minimalist Abstract Zuxrash Brand Mark */}
             <div className="relative group">
               <NariLogo size={72} withGlow />
             </div>
@@ -330,7 +330,7 @@ export const ChatArea: React.FC<ChatAreaProps> = ({
                     isUser ? 'justify-end' : 'justify-start'
                   } group`}
                 >
-                  {/* AI Avatar on left: Minimalist Nari Brand Emblem */}
+                  {/* AI Avatar on left: Minimalist Zuxrash Brand Emblem */}
                   {!isUser && (
                     <div className="shrink-0 mt-1">
                       <NariLogo size={30} />
