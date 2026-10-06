@@ -104,9 +104,9 @@ export const Sidebar: React.FC<SidebarProps> = ({
 
       {/* Sidebar container */}
       <aside
-        className={`fixed top-0 bottom-0 left-0 z-50 flex flex-col bg-[#07050e] border-r border-[#221638]/70 backdrop-blur-2xl transition-all duration-300 ease-in-out lg:static ${
+        className={`zuxrash-sidebar fixed top-0 bottom-0 left-0 z-50 flex flex-col bg-[#07050e]/95 border-r border-[#221638]/70 backdrop-blur-2xl transition-all duration-300 ease-in-out lg:static ${
           isOpen ? 'translate-x-0' : '-translate-x-full lg:translate-x-0'
-        } ${isCollapsed ? 'lg:w-[74px]' : 'w-72 lg:w-80'}`}
+        } ${isCollapsed ? 'lg:w-[72px]' : 'w-72 lg:w-[280px]'}`}
       >
         {/* Brand Header with Zuxrash Icon & Wordmark */}
         <div className="flex items-center justify-between px-4 py-3.5 border-b border-[#1f1533]">
