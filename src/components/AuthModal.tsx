@@ -13,7 +13,7 @@ import {
   registerWithEmail,
   loginWithGoogle,
 } from '../services/authService';
-import { NariLogo } from './ZuxrashLogo';
+import { ZuxrashLogo } from './ZuxrashLogo';
 
 interface AuthModalProps {
   onSuccess?: () => void;
