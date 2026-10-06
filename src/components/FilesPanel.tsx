@@ -146,7 +146,7 @@ export const FilesPanel: React.FC<FilesPanelProps> = ({
   };
 
   return (
-    <div className="flex-1 overflow-y-auto p-4 md:p-8 max-w-6xl mx-auto w-full space-y-6">
+    <div className="flex-1 overflow-y-auto p-4 sm:p-5 md:p-8 max-w-6xl mx-auto w-full space-y-6">
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#1f1433] pb-4">
         <div>
@@ -247,7 +247,7 @@ export const FilesPanel: React.FC<FilesPanelProps> = ({
 
       {/* Files List */}
       {filteredFiles.length === 0 ? (
-        <div className="bg-[#0c0817] border border-[#1f1533] rounded-2xl p-12 text-center flex flex-col items-center justify-center space-y-3">
+        <div className="glass-card rounded-2xl p-8 sm:p-12 text-center flex flex-col items-center justify-center space-y-3">
           <div className="w-12 h-12 rounded-2xl bg-[#160e28] border border-purple-800/30 flex items-center justify-center text-pink-400">
             <FileText className="w-6 h-6" />
           </div>
