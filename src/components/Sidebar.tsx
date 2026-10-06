@@ -19,7 +19,7 @@ import {
   LogOut,
 } from 'lucide-react';
 import { Conversation, UserProfile } from '../types/chat';
-import { NariLogo } from './ZuxrashLogo';
+import { ZuxrashLogo } from './ZuxrashLogo';
 
 interface SidebarProps {
   conversations: Conversation[];
