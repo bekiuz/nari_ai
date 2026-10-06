@@ -111,7 +111,7 @@ class LiveVoiceService {
         micErr.name === 'DevicesNotFoundError';
 
       const msg = isPermissionDenied
-        ? 'Microphone permission was denied. Please allow microphone access in your browser settings to speak with Nari AI.'
+        ? 'Microphone permission was denied. Please allow microphone access in your browser settings to speak with Zuxrash.'
         : isDeviceNotFound
         ? 'No microphone detected. Please connect an audio input device.'
         : 'Unable to access microphone. Please check your audio input device permissions.';
@@ -372,7 +372,7 @@ class LiveVoiceService {
   }
 
   /**
-   * Interrupts Nari speaking and tells server.
+   * Interrupts Zuxrash speaking and tells server.
    */
   public interrupt() {
     this.stopCurrentAudioPlayback();
