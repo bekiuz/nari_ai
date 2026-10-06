@@ -870,7 +870,7 @@ export default function App() {
   }
 
   return (
-    <div className="flex h-screen w-screen overflow-hidden bg-[#06040b] text-slate-100 font-sans">
+    <div className="zuxrash-shell flex h-screen w-screen overflow-hidden text-slate-100 font-sans">
       {/* Sidebar Navigation */}
       <Sidebar
         conversations={conversations}
