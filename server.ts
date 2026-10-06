@@ -812,7 +812,7 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
                     }));
                   }
 
-                  // Output transcription (Nari spoken text)
+                  // Output transcription (Zuxrash spoken text)
                   const outputText = liveMsg.serverContent?.outputTranscription?.text;
                   if (outputText) {
                     clientWs.send(JSON.stringify({
