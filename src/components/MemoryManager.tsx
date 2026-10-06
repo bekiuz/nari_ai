@@ -210,7 +210,7 @@ export const MemoryManager: React.FC<MemoryManagerProps> = ({
 
       {/* Memory Cards Grid */}
       {filteredMemories.length === 0 ? (
-        <div className="bg-[#0c0817] border border-[#1f1533] rounded-2xl p-12 text-center flex flex-col items-center justify-center space-y-3">
+        <div className="glass-card rounded-2xl p-12 text-center flex flex-col items-center justify-center space-y-3">
           <div className="w-12 h-12 rounded-2xl bg-[#160e28] border border-purple-800/30 flex items-center justify-center text-pink-400">
             <Brain className="w-6 h-6" />
           </div>
