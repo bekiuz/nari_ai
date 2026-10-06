@@ -21,7 +21,7 @@ All data is stored in Google Cloud Firestore (not just local storage):
 - `user_settings`: Personalized model choice, temperature, custom system prompts, and memory toggles.
 
 ### 3. Continuous Long-Term Memory
-- **Automatic Fact Detection**: Nari AI analyzes incoming conversations and extracts enduring user facts, tech stack preferences, and personal context.
+- **Automatic Fact Detection**: Zuxrash analyzes incoming conversations and extracts enduring user facts, tech stack preferences, and personal context.
 - **Direct Command Controls**:
   - Say `"remember this: [fact]"` (e.g. `"remember this: I prefer TypeScript with Tailwind v4"`) to manually store an instruction.
   - Say `"forget this: [topic]"` to remove matching memories.
