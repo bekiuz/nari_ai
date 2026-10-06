@@ -13,7 +13,7 @@ import {
   registerWithEmail,
   loginWithGoogle,
 } from '../services/authService';
-import { NariLogo } from './NariLogo';
+import { NariLogo } from './ZuxrashLogo';
 
 interface AuthModalProps {
   onSuccess?: () => void;
@@ -92,7 +92,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ onSuccess }) => {
         {/* Logo and Header */}
         <div className="flex flex-col items-center text-center space-y-2.5">
           <div className="mb-1">
-            <NariLogo size={52} withGlow />
+            <ZuxrashLogo size={52} withGlow />
           </div>
           <div className="flex items-center gap-1.5">
             <span className="text-xl sm:text-2xl font-bold tracking-tight text-white">
