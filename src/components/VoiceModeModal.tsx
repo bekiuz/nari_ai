@@ -164,7 +164,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex flex-col bg-[#050308]/95 backdrop-blur-2xl text-white overflow-hidden select-none animate-in fade-in duration-200">
+    <div className="fixed inset-0 z-50 flex flex-col zuxrash-shell bg-[#050308]/95 backdrop-blur-2xl text-white overflow-hidden select-none animate-in fade-in duration-200">
       {/* Ambient background glows */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden="true">
         <div
@@ -182,11 +182,11 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
       </div>
 
       {/* Top Navigation Bar */}
-      <header className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-4 border-b border-purple-900/20 bg-[#08050e]/60 backdrop-blur-md">
+      <header className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-4 border-b border-purple-900/20 bg-[#08050e]/70 backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
             <NariLogo size={28} />
-            <span className="font-semibold text-sm tracking-tight text-white">Nari Voice</span>
+            <span className="font-semibold text-sm tracking-tight text-white">Zuxrash Voice</span>
           </div>
           <div className="h-4 w-px bg-purple-800/40 hidden sm:block" />
           <span className="text-xs text-slate-400 font-mono truncate max-w-[180px] sm:max-w-xs hidden sm:inline">
@@ -259,7 +259,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
           {state === 'speaking' && (
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-300 text-xs font-medium animate-pulse">
               <span className="w-2 h-2 rounded-full bg-pink-400 animate-ping" />
-              <span>Nari AI is speaking</span>
+              <span>Zuxrash is speaking</span>
             </div>
           )}
 
@@ -309,7 +309,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
           )}
         </div>
 
-        {/* Center: Glowing Responsive Nari Logo */}
+        {/* Center: Glowing Responsive Zuxrash Logo */}
         <div className="relative my-auto flex items-center justify-center py-6">
           {/* Dynamic Audio Waves Ring */}
           <div
@@ -361,7 +361,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
             {recentTurns.length === 0 && !liveUserText && !liveModelText && (
               <div className="h-full flex flex-col items-center justify-center text-slate-500 text-center space-y-1">
                 <Sparkles className="w-4 h-4 text-purple-400/60" />
-                <p>Speak naturally. Nari AI is listening in real time.</p>
+                <p>Speak naturally. Zuxrash is listening in real time.</p>
                 <p className="text-[10px] text-slate-600">You can interrupt anytime by speaking.</p>
               </div>
             )}
@@ -403,7 +403,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
               <div className="flex justify-start">
                 <div className="px-3 py-1.5 rounded-xl max-w-[85%] bg-[#1a0f30] text-pink-200 border border-pink-500/40">
                   <span className="text-[9px] font-mono uppercase tracking-wider block mb-0.5 text-pink-400">
-                    Nari speaking...
+                    Zuxrash speaking...
                   </span>
                   {liveModelText}
                 </div>
