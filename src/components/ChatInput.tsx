@@ -326,8 +326,8 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               isListening
                 ? 'Listening to speech... Speak clearly'
                 : isWebSearchActive
-                ? 'Ask Nari AI with live Google Web Search enabled...'
-                : 'Ask Nari AI anything, or analyze files and images...'
+                ? 'Ask Zuxrash with live Google Web Search enabled...'
+                : 'Ask Zuxrash anything, or analyze files and images...'
             }
             className="w-full bg-transparent px-2.5 py-1 text-sm md:text-[15px] text-slate-100 placeholder-slate-500 focus:outline-none resize-none leading-relaxed min-h-[40px] max-h-[180px]"
             aria-label="Message prompt"
