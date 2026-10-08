@@ -1,40 +1,19 @@
 <svg viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="zuxrash-main" x1="14" y1="14" x2="50" y2="52" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#a78bfa" />
-      <stop offset="52%" stop-color="#ec4899" />
-      <stop offset="100%" stop-color="#fb7185" />
+    <linearGradient id="zx" x1="12" y1="12" x2="52" y2="52" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#C4B5FD"/>
+      <stop offset=".48" stop-color="#F472B6"/>
+      <stop offset="1" stop-color="#FB7185"/>
     </linearGradient>
-    <linearGradient id="zuxrash-hi" x1="48" y1="14" x2="18" y2="50" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#f5d0fe" />
-      <stop offset="50%" stop-color="#f9a8d4" />
-      <stop offset="100%" stop-color="#fb7185" />
+    <linearGradient id="bg" x1="8" y1="5" x2="56" y2="60" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#1C1230"/>
+      <stop offset="1" stop-color="#07050D"/>
     </linearGradient>
-    <linearGradient id="zuxrash-plate" x1="0" y1="0" x2="64" y2="64" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#171026" />
-      <stop offset="100%" stop-color="#080511" />
-    </linearGradient>
-    <linearGradient id="zuxrash-stroke" x1="4" y1="4" x2="60" y2="60" gradientUnits="userSpaceOnUse">
-      <stop offset="0%" stop-color="#a855f7" stop-opacity="0.6" />
-      <stop offset="52%" stop-color="#ec4899" stop-opacity="0.4" />
-      <stop offset="100%" stop-color="#fb7185" stop-opacity="0.2" />
-    </linearGradient>
-    <radialGradient id="zuxrash-glow" cx="50%" cy="42%" r="56%">
-      <stop offset="0%" stop-color="#ec4899" stop-opacity="0.2" />
-      <stop offset="100%" stop-color="#8b5cf6" stop-opacity="0" />
-    </radialGradient>
   </defs>
-
-  <rect x="2.5" y="2.5" width="59" height="59" rx="16" fill="url(#zuxrash-plate)" stroke="url(#zuxrash-stroke)" stroke-width="1.2" />
-  <circle cx="32" cy="30" r="20" fill="url(#zuxrash-glow)" />
-
-  <path d="M17 17.5H46.5C48.8 17.5 50 20.4 48.3 22.1L21.4 43.5C20 44.7 20.8 46.5 22.7 46.5H47"
-    stroke="url(#zuxrash-main)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-  <path d="M17.5 17.5H44.5L20 46.5"
-    stroke="url(#zuxrash-hi)" stroke-width="2.1" stroke-linecap="round" stroke-linejoin="round" opacity="0.92" />
-  <path d="M24 34.5L32 28"
-    stroke="#ffffff" stroke-width="1.7" stroke-linecap="round" opacity="0.82" />
-
-  <circle cx="32" cy="28" r="2.1" fill="#ffffff" opacity="0.95" />
-  <circle cx="32" cy="28" r="4.6" fill="#f472b6" opacity="0.22" />
+  <rect x="3" y="3" width="58" height="58" rx="17" fill="url(#bg)"/>
+  <rect x="3" y="3" width="58" height="58" rx="17" stroke="url(#zx)" stroke-opacity=".45"/>
+  <path d="M17 19H47L20 45H47" stroke="url(#zx)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M19 19H43" stroke="#FFF7FC" stroke-width="1.8" stroke-linecap="round" opacity=".9"/>
+  <path d="M22 45H46" stroke="#FBCFE8" stroke-width="1.8" stroke-linecap="round" opacity=".7"/>
+  <path d="M48 12V20M44 16H52" stroke="#FCE7F3" stroke-width="1.6" stroke-linecap="round"/>
 </svg>
