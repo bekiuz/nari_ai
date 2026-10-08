@@ -408,47 +408,6 @@ export const ChatInput: React.FC<ChatInputProps> = ({
                 <Paperclip className="w-4 h-4 md:w-4.5 md:h-4.5" />
               </button>
 
-              {/* Real-time Voice Chat Mode button in tool row */}
-              {onOpenVoiceMode && (
-                <button
-                  type="button"
-                  onClick={onOpenVoiceMode}
-                  className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-xl border text-xs font-medium transition-all cursor-pointer ${
-                    isVoiceSessionActive
-                      ? 'bg-pink-500/25 text-pink-300 border-pink-500/60 shadow-sm animate-pulse'
-                      : 'bg-[#120a1f] text-slate-300 border-[#221438] hover:text-pink-300 hover:bg-[#1c0f30] hover:border-purple-600/40'
-                  }`}
-                  title={isVoiceSessionActive ? 'Gemini Live Voice Active (Click to open)' : 'Start Gemini Live Voice Mode'}
-                  aria-label="Start Voice Mode"
-                >
-                  <Mic className="w-3.5 h-3.5 text-pink-400" />
-                  <span className="hidden sm:inline">Voice Mode</span>
-                  {isVoiceSessionActive && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-pink-400 animate-ping" />
-                  )}
-                </button>
-              )}
-
-              {/* Voice dictation fallback to text input */}
-              <button
-                type="button"
-                onClick={toggleListening}
-                className={`p-2 rounded-xl transition-colors cursor-pointer ${
-                  isListening
-                    ? 'text-rose-400 bg-rose-950/60 border border-rose-600/50 animate-pulse'
-                    : 'text-slate-400 hover:text-pink-300 hover:bg-purple-950/40'
-                }`}
-                title={isListening ? 'Stop recording dictation' : 'Speech-to-text dictation into prompt'}
-                aria-label={isListening ? 'Stop speech dictation' : 'Start speech dictation'}
-              >
-                {isListening ? (
-                  <MicOff className="w-4 h-4 text-rose-400" />
-                ) : (
-                  <Mic className="w-4 h-4" />
-                )}
-              </button>
-            </div>
-
             {/* Right controls: Voice Mode trigger, Stop Voice, and Send/Stop buttons */}
             <div className="flex items-center gap-1.5 sm:gap-2">
               <span className="hidden lg:inline text-[10px] text-slate-500 font-mono">
