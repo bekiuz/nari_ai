@@ -888,7 +888,7 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
           liveSession.sendRealtimeInput({
             audio: {
               data: msg.data,
-              mimeType: 'audio/pcm;rate=16000',
+              mimeType: `audio/pcm;rate=${Number(msg.sampleRate) || 16000}`,
             },
           });
         } else if (msg.type === 'text' && msg.text) {
