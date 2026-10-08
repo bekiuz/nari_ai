@@ -15,6 +15,7 @@ import {
 } from 'lucide-react';
 import { Attachment } from '../types/chat';
 import { getAuthToken } from '../services/authService';
+import { apiUrl } from '../utils/api';
 
 interface ChatInputProps {
   onSendMessage: (text: string, attachments: Attachment[], webSearch?: boolean) => void;
@@ -195,7 +196,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
           try {
             const token = await getAuthToken();
             const base64 = dataUrl.split(',')[1] || dataUrl;
-            const res = await fetch('/api/files/extract', {
+            const res = await fetch(apiUrl('/api/files/extract'), {
               method: 'POST',
               headers: {
                 'Content-Type': 'application/json',
