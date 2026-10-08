@@ -407,6 +407,7 @@ export const ChatInput: React.FC<ChatInputProps> = ({
               >
                 <Paperclip className="w-4 h-4 md:w-4.5 md:h-4.5" />
               </button>
+            </div>
 
             {/* Right controls: Voice Mode trigger, Stop Voice, and Send/Stop buttons */}
             <div className="flex items-center gap-1.5 sm:gap-2">
