@@ -5,6 +5,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
+import { createVerify } from 'crypto';
 import { GoogleGenAI, Type, Modality } from '@google/genai';
 
 dotenv.config();
@@ -45,23 +46,105 @@ function getGenAIClient(): GoogleGenAI {
 }
 
 // Token verification helper
-function verifyToken(token: string): { uid: string; email?: string } | null {
+type FirebaseTokenPayload = {
+  aud?: string;
+  exp?: number;
+  iat?: number;
+  iss?: string;
+  sub?: string;
+  user_id?: string;
+  email?: string;
+};
+
+type GoogleCertCache = {
+  keys: Record<string, string>;
+  expiresAt: number;
+};
+
+let googleCertCache: GoogleCertCache | null = null;
+
+function decodeBase64Url(value: string): string {
+  const normalized = value.replace(/-/g, '+').replace(/_/g, '/');
+  const padded = normalized + '='.repeat((4 - (normalized.length % 4)) % 4);
+  return Buffer.from(padded, 'base64').toString('utf8');
+}
+
+function getFirebaseProjectId(): string {
+  const projectId = firebaseConfig.projectId || process.env.GOOGLE_CLOUD_PROJECT;
+  if (!projectId) {
+    throw new Error('Firebase projectId is missing from firebase-applet-config.json or GOOGLE_CLOUD_PROJECT.');
+  }
+  return projectId;
+}
+
+async function getGoogleCertificateKeys(forceRefresh = false): Promise<Record<string, string>> {
+  const now = Date.now();
+
+  if (!forceRefresh && googleCertCache && googleCertCache.expiresAt > now) {
+    return googleCertCache.keys;
+  }
+
+  const certUrl =
+    'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com';
+  const response = await fetch(certUrl);
+  if (!response.ok) {
+    throw new Error(`Unable to fetch Firebase public keys (HTTP ${response.status}).`);
+  }
+
+  const keys = (await response.json()) as Record<string, string>;
+  const cacheControl = response.headers.get('cache-control') || '';
+  const maxAgeMatch = cacheControl.match(/max-age=(\\d+)/i);
+  const maxAgeSeconds = maxAgeMatch ? Number(maxAgeMatch[1]) : 3600;
+
+  googleCertCache = {
+    keys,
+    expiresAt: now + Math.max(60, Math.min(maxAgeSeconds, 86400)) * 1000,
+  };
+
+  return keys;
+}
+
+async function verifyToken(token: string): Promise<{ uid: string; email?: string } | null> {
   if (!token) return null;
+
   try {
     const parts = token.split('.');
     if (parts.length !== 3) return null;
 
-    const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
+    const header = JSON.parse(decodeBase64Url(parts[0])) as { alg?: string; kid?: string };
+    const payload = JSON.parse(decodeBase64Url(parts[1])) as FirebaseTokenPayload;
+
+    if (header.alg !== 'RS256' || !header.kid) return null;
+
+    const projectId = getFirebaseProjectId();
     const now = Math.floor(Date.now() / 1000);
 
-    if (payload.exp && payload.exp < now) return null;
-    if (firebaseConfig.projectId && payload.aud && payload.aud !== firebaseConfig.projectId) return null;
+    if (!payload.sub || payload.sub.length > 128) return null;
+    if (!payload.aud || payload.aud !== projectId) return null;
+    if (!payload.iss || payload.iss !== `https://securetoken.google.com/${projectId}`) return null;
+    if (!payload.exp || payload.exp <= now) return null;
+    if (!payload.iat || payload.iat > now + 300) return null;
 
-    const uid = payload.user_id || payload.sub;
-    if (!uid) return null;
+    let keys = await getGoogleCertificateKeys();
+    let certificate = keys[header.kid];
+
+    // Refresh once when Google rotates signing keys.
+    if (!certificate) {
+      keys = await getGoogleCertificateKeys(true);
+      certificate = keys[header.kid];
+    }
+
+    if (!certificate) return null;
+
+    const verifier = createVerify('RSA-SHA256');
+    verifier.update(`${parts[0]}.${parts[1]}`);
+    verifier.end();
+
+    const signature = Buffer.from(parts[2].replace(/-/g, '+').replace(/_/g, '/'), 'base64');
+    if (!verifier.verify(certificate, signature)) return null;
 
     return {
-      uid,
+      uid: payload.user_id || payload.sub,
       email: payload.email,
     };
   } catch {
@@ -70,20 +153,27 @@ function verifyToken(token: string): { uid: string; email?: string } | null {
 }
 
 // Authentication token verification middleware
-function requireAuth(req: Request, res: Response, next: NextFunction) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Unauthorized: Missing or invalid authentication token.' });
-  }
+async function requireAuth(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      res.status(401).json({ error: 'Unauthorized: Missing or invalid authentication token.' });
+      return;
+    }
 
-  const token = authHeader.split('Bearer ')[1].trim();
-  const user = verifyToken(token);
-  if (!user) {
-    return res.status(401).json({ error: 'Unauthorized: Invalid or expired authentication token.' });
-  }
+    const token = authHeader.slice('Bearer '.length).trim();
+    const user = await verifyToken(token);
 
-  (req as any).user = user;
-  next();
+    if (!user) {
+      res.status(401).json({ error: 'Unauthorized: Invalid or expired authentication token.' });
+      return;
+    }
+
+    (req as any).user = user;
+    next();
+  } catch {
+    res.status(401).json({ error: 'Unauthorized: Invalid or expired authentication token.' });
+  }
 }
 
 // Model list endpoint
@@ -725,7 +815,7 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
         const msg = JSON.parse(raw.toString());
 
         if (msg.type === 'init') {
-          const authUser = verifyToken(msg.token);
+          const authUser = await verifyToken(msg.token);
           if (!authUser) {
             clientWs.send(JSON.stringify({ type: 'error', error: 'Authentication failed. Please sign in again.' }));
             return clientWs.close(4001, 'Unauthorized');
