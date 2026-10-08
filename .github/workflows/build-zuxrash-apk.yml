@@ -4,6 +4,7 @@ on:
   push:
     paths:
       - 'ZuxrashAI_Android.zip'
+      - 'android/MainActivity.java'
       - '.github/workflows/build-zuxrash-apk.yml'
   workflow_dispatch:
 
@@ -17,6 +18,10 @@ jobs:
 
       - name: Extract Android project
         run: unzip -q ZuxrashAI_Android.zip
+
+      - name: Patch Android login wrapper
+        run: |
+          cp android/MainActivity.java             ZuxrashAI_Android/app/src/main/java/com/bekiuz/zuxrash/MainActivity.java
 
       - name: Setup Java
         uses: actions/setup-java@v4
