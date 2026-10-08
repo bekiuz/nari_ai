@@ -177,7 +177,7 @@ class TTSService {
     if (!token) return;
 
     try {
-      const response = await fetch('/api/voice/preview', {
+      const response = await fetch(apiUrl('/api/voice/preview'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
