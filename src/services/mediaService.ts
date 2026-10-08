@@ -14,6 +14,7 @@ import {
 import { db, storage, handleFirestoreError, OperationType } from '../firebase/config';
 import { UploadedMediaItem } from '../types/chat';
 import { getAuthToken } from './authService';
+import { apiUrl } from '../utils/api';
 
 export function subscribeToUserMedia(
   userId: string,
@@ -145,7 +146,7 @@ export async function uploadFileWithStorage(
   // Extract readable text via server endpoint
   try {
     const token = await getAuthToken();
-    const extractRes = await fetch('/api/files/extract', {
+    const extractRes = await fetch(apiUrl('/api/files/extract'), {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
