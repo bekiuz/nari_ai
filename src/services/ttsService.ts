@@ -1,4 +1,5 @@
 import { GeminiVoiceName } from '../types/chat';
+import { apiUrl } from '../utils/api';
 
 export type TTSState = 'idle' | 'loading' | 'playing' | 'paused';
 
@@ -77,7 +78,7 @@ class TTSService {
     // 1. Try Gemini Official TTS (/api/voice/tts) if authenticated
     if (token) {
       try {
-        const response = await fetch('/api/voice/tts', {
+        const response = await fetch(apiUrl('/api/voice/tts'), {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
