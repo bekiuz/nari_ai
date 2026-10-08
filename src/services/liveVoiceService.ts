@@ -34,6 +34,8 @@ class LiveVoiceService {
   private micStream: MediaStream | null = null;
   private scriptProcessor: ScriptProcessorNode | null = null;
   private wakeLock: any = null;
+  private inputSampleRate = 16000;
+  private resumeHandler: (() => void) | null = null;
 
   private state: LiveVoiceState = 'idle';
   private callbacks: Partial<LiveVoiceCallbacks> = {};
@@ -94,7 +96,6 @@ class LiveVoiceService {
     try {
       this.micStream = await navigator.mediaDevices.getUserMedia({
         audio: {
-          sampleRate: 16000,
           channelCount: 1,
           echoCancellation: true,
           noiseSuppression: true,
@@ -124,9 +125,17 @@ class LiveVoiceService {
     // 2. Initialize 16kHz input AudioContext & ScriptProcessor
     try {
       const AudioCtxClass = window.AudioContext || (window as any).webkitAudioContext;
-      this.inputAudioCtx = new AudioCtxClass({ sampleRate: 16000 });
+      // Do not force a hardware sample rate. Mobile WebViews commonly expose
+      // 48kHz or 44.1kHz input. Gemini Live accepts other rates when the
+      // actual rate is declared in the PCM MIME type sent to the server.
+      this.inputAudioCtx = new AudioCtxClass();
+      this.inputSampleRate = this.inputAudioCtx.sampleRate || 16000;
       if (this.inputAudioCtx.state === 'suspended') {
-        await this.inputAudioCtx.resume();
+        try {
+          await this.inputAudioCtx.resume();
+        } catch {
+          // Some mobile WebViews require a direct user gesture to resume audio.
+        }
       }
 
       const source = this.inputAudioCtx.createMediaStreamSource(this.micStream);
@@ -168,6 +177,7 @@ class LiveVoiceService {
           JSON.stringify({
             type: 'audio',
             data: base64Audio,
+            sampleRate: this.inputSampleRate,
           })
         );
       };
@@ -304,6 +314,13 @@ class LiveVoiceService {
         this.setState('idle');
       }
     };
+
+    // Mobile WebViews can keep Web Audio suspended until a user gesture.
+    this.resumeHandler = () => {
+      void this.resumeAudioContexts();
+    };
+    window.addEventListener('pointerdown', this.resumeHandler, { passive: true });
+    window.addEventListener('touchstart', this.resumeHandler, { passive: true });
   }
 
   /**
@@ -382,10 +399,25 @@ class LiveVoiceService {
     this.setState('listening');
   }
 
+  /** Resume Web Audio contexts, especially inside mobile WebViews. */
+  public async resumeAudioContexts(): Promise<void> {
+    const contexts = [this.inputAudioCtx, this.outputAudioCtx];
+    for (const ctx of contexts) {
+      if (ctx && ctx.state === 'suspended') {
+        try {
+          await ctx.resume();
+        } catch {
+          // Wait for another direct user gesture.
+        }
+      }
+    }
+  }
+
   /**
    * Mute / unmute microphone input.
    */
   public toggleMute(): boolean {
+    void this.resumeAudioContexts();
     this.isMuted = !this.isMuted;
     if (this.micStream) {
       this.micStream.getAudioTracks().forEach((track) => {
@@ -400,6 +432,12 @@ class LiveVoiceService {
    */
   public stopSession() {
     this.stopCurrentAudioPlayback();
+
+    if (this.resumeHandler) {
+      window.removeEventListener('pointerdown', this.resumeHandler);
+      window.removeEventListener('touchstart', this.resumeHandler);
+      this.resumeHandler = null;
+    }
 
     // Release microphone tracks
     if (this.micStream) {
