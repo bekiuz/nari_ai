@@ -261,13 +261,17 @@ app.post('/api/chat', requireAuth, async (req: Request, res: Response) => {
     };
 
     if (webSearch) {
-      // Official Google Search grounding tool for @google/genai SDK
+      // Official Google Search grounding tool for @google/genai SDK.
+      // The model-selection block above routes Search requests to Gemini 2.5 Flash,
+      // whose Free Tier currently supports Google Search grounding.
       config.tools = [
         {
           googleSearch: {},
         },
       ];
-      console.log(`[WebSearch Diagnostic] Web Search ON for request. Attached official tool: { googleSearch: {} }`);
+      config.systemInstruction =
+        `${finalSystemInstruction || ''}\n\nWEB SEARCH IS ENABLED: You MUST use the Google Search tool before answering the user. Base current or factual claims on the returned web results and cite the available sources. Do not pretend to have browsed if the tool returns no results.`.trim();
+      console.log(`[WebSearch Diagnostic] Web Search ON for request. Using Gemini 2.5 Flash + official { googleSearch: {} }.`);
     } else {
       console.log(`[WebSearch Diagnostic] Web Search OFF for request. No search tool attached.`);
     }
@@ -321,8 +325,15 @@ app.post('/api/chat', requireAuth, async (req: Request, res: Response) => {
       };
     }
 
-    const fallbackOrder = ['gemini-3.8-flash', 'gemini-3.5-flash', 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite'];
-    const modelsToTry = Array.from(new Set([model, ...fallbackOrder]));
+    // Google Search grounding is not available for Gemini 3.x on the API Free Tier.
+    // Use Gemini 2.5 Flash when Search is enabled; it supports up to 500 free grounded
+    // requests per day on the Free Tier.
+    const fallbackOrder = webSearch
+      ? ['gemini-2.5-flash', 'gemini-2.5-flash-lite']
+      : ['gemini-3.8-flash', 'gemini-3.7-flash', 'gemini-3.1-flash-lite', 'gemini-3.5-flash-lite'];
+    const modelsToTry = webSearch
+      ? Array.from(new Set(['gemini-2.5-flash', ...fallbackOrder]))
+      : Array.from(new Set([model, ...fallbackOrder]));
 
     if (stream) {
       // SSE Streaming headers
