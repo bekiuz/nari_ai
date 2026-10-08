@@ -57,6 +57,7 @@ import {
   saveCloudUserSettings,
 } from './services/settingsService';
 import { DEFAULT_SETTINGS } from './utils/storage';
+import { apiUrl } from './utils/api';
 import { ZuxrashLogo } from './components/ZuxrashLogo';
 import { liveVoiceService } from './services/liveVoiceService';
 
@@ -493,7 +494,7 @@ export default function App() {
         enhancedSystemPrompt += formatMemoriesForPrompt(memories, text);
       }
 
-      const response = await fetch('/api/chat', {
+      const response = await fetch(apiUrl('/api/chat'), {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
