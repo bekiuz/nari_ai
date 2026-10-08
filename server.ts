@@ -806,8 +806,14 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
           }
 
           try {
-            liveSession = await ai.live.connect({
-              model: 'gemini-3.8-live',
+            const liveModels = ['gemini-3.8-live', 'gemini-3.1-flash-live-preview'];
+            let lastLiveError: any = null;
+
+            for (const liveModel of liveModels) {
+              try {
+                console.log(`[LiveVoice] Connecting model=${liveModel}`);
+                liveSession = await ai.live.connect({
+                  model: liveModel,
               config: liveConfig,
               callbacks: {
                 onmessage: (liveMsg) => {
@@ -866,7 +872,18 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
                   }
                 },
               },
-            });
+                });
+
+                if (liveSession) break;
+              } catch (liveErr: any) {
+                lastLiveError = liveErr;
+                console.warn(`[LiveVoice] model=${liveModel} failed:`, liveErr?.message || liveErr);
+              }
+            }
+
+            if (!liveSession) {
+              throw lastLiveError || new Error('Could not connect to Gemini Live service.');
+            }
 
             clientWs.send(JSON.stringify({
               type: 'ready',
