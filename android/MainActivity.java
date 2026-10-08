@@ -60,7 +60,7 @@ public class MainActivity extends Activity {
         settings.setJavaScriptCanOpenWindowsAutomatically(true);
         settings.setSupportMultipleWindows(true);
         settings.setCacheMode(WebSettings.LOAD_DEFAULT);
-        settings.setUserAgentString(settings.getUserAgentString() + " ZuxrashAI-Android/1.1");
+        settings.setUserAgentString(settings.getUserAgentString() + " ZuxrashAI-Android/1.2");
 
         CookieManager cookieManager = CookieManager.getInstance();
         cookieManager.setAcceptCookie(true);
@@ -141,7 +141,7 @@ public class MainActivity extends Activity {
                                     == PackageManager.PERMISSION_GRANTED;
 
                     if (audioGranted && videoGranted) {
-                        request.grant(request.getResources());
+                        grantAllowedWebResources(request);
                         pendingPermissionRequest = null;
                         return;
                     }
@@ -166,6 +166,13 @@ public class MainActivity extends Activity {
                         );
                     }
                 });
+            }
+
+            @Override
+            public void onPermissionRequestCanceled(PermissionRequest request) {
+                if (pendingPermissionRequest == request) {
+                    pendingPermissionRequest = null;
+                }
             }
 
             @Override
@@ -226,6 +233,26 @@ public class MainActivity extends Activity {
         });
 
         return view;
+    }
+
+    private void grantAllowedWebResources(PermissionRequest request) {
+        if (request == null) {
+            return;
+        }
+
+        java.util.ArrayList<String> allowed = new java.util.ArrayList<>();
+        for (String resource : request.getResources()) {
+            if (PermissionRequest.RESOURCE_AUDIO_CAPTURE.equals(resource)
+                    || PermissionRequest.RESOURCE_VIDEO_CAPTURE.equals(resource)) {
+                allowed.add(resource);
+            }
+        }
+
+        if (allowed.isEmpty()) {
+            request.deny();
+        } else {
+            request.grant(allowed.toArray(new String[0]));
+        }
     }
 
     private void closePopup() {
@@ -294,9 +321,7 @@ public class MainActivity extends Activity {
         }
 
         if (allGranted) {
-            pendingPermissionRequest.grant(
-                    pendingPermissionRequest.getResources()
-            );
+            grantAllowedWebResources(pendingPermissionRequest);
         } else {
             pendingPermissionRequest.deny();
         }
