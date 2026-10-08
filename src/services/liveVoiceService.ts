@@ -156,11 +156,23 @@ class LiveVoiceService {
         const normalizedVol = Math.min(Math.max((rms - 0.01) * 5, 0), 1);
         this.callbacks.onVolumeChange?.(normalizedVol);
 
-        // Convert Float32Array to 16-bit PCM (little-endian)
-        const pcmBuffer = new ArrayBuffer(inputChannel.length * 2);
+        // Gemini Live input: mono 16-bit PCM at 16kHz.
+        // Mobile microphones are often 44.1/48kHz, so resample in the WebView
+        // before sending rather than relying on device-specific sample-rate behavior.
+        const targetRate = 16000;
+        const ratio = this.inputSampleRate / targetRate;
+        const targetLength = Math.max(1, Math.round(inputChannel.length / ratio));
+        const pcmBuffer = new ArrayBuffer(targetLength * 2);
         const pcmView = new DataView(pcmBuffer);
-        for (let i = 0; i < inputChannel.length; i++) {
-          const s = Math.max(-1, Math.min(1, inputChannel[i]));
+
+        for (let i = 0; i < targetLength; i++) {
+          const sourceIndex = i * ratio;
+          const index0 = Math.min(Math.floor(sourceIndex), inputChannel.length - 1);
+          const index1 = Math.min(index0 + 1, inputChannel.length - 1);
+          const fraction = sourceIndex - index0;
+          const sample =
+            inputChannel[index0] + (inputChannel[index1] - inputChannel[index0]) * fraction;
+          const s = Math.max(-1, Math.min(1, sample));
           const val = s < 0 ? s * 0x8000 : s * 0x7fff;
           pcmView.setInt16(i * 2, val, true);
         }
@@ -177,7 +189,7 @@ class LiveVoiceService {
           JSON.stringify({
             type: 'audio',
             data: base64Audio,
-            sampleRate: this.inputSampleRate,
+            sampleRate: 16000,
           })
         );
       };
