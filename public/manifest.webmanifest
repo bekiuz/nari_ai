@@ -1,0 +1,20 @@
+{
+  "name": "Zuxrash AI",
+  "short_name": "Zuxrash",
+  "description": "Futuristic AI assistant powered by Google Gemini.",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#05030a",
+  "theme_color": "#12081f",
+  "prefer_related_applications": false,
+  "icons": [
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
