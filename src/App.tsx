@@ -858,7 +858,7 @@ export default function App() {
       <div className="flex h-screen w-screen items-center justify-center bg-[#06040b] text-white">
         <div className="flex flex-col items-center gap-4">
           <ZuxrashLogo size={64} withGlow />
-          <span className="text-xs font-mono text-pink-300 tracking-wider">Connecting to Zuxrash Cloud...</span>
+          <span className="text-xs font-mono text-pink-300 tracking-wider">Connecting to Nari AI Cloud...</span>
         </div>
       </div>
     );
