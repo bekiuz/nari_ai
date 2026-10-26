@@ -1,6 +1,6 @@
-# Zuxrash — Futuristic AI Assistant with Cloud Backend & Long-Term Memory
+# Nari AI — Shaxsiy AI yordamchi va uzoq muddatli xotira
 
-Zuxrash is a full-stack, futuristic AI assistant web application featuring a sleek dark glassmorphic interface, powered by Google Gemini API (`gemini-3.8-flash`, `gemini-3.1-flash-lite`, & `gemini-3.1-pro-preview`) with a real cloud database and authentication backend.
+Nari AI is a full-stack personal AI assistant web application featuring a sleek dark glassmorphic interface, powered by Google Gemini API (`gemini-3.8-flash`, `gemini-3.1-flash-lite`, & `gemini-3.1-pro-preview`) with a real cloud database and authentication backend.
 
 ## ✨ Upgraded Features
 
@@ -21,7 +21,7 @@ All data is stored in Google Cloud Firestore (not just local storage):
 - `user_settings`: Personalized model choice, temperature, custom system prompts, and memory toggles.
 
 ### 3. Continuous Long-Term Memory
-- **Automatic Fact Detection**: Zuxrash analyzes incoming conversations and extracts enduring user facts, tech stack preferences, and personal context.
+- **Automatic Fact Detection**: Nari AI analyzes incoming conversations and extracts enduring user facts, tech stack preferences, and personal context.
 - **Direct Command Controls**:
   - Say `"remember this: [fact]"` (e.g. `"remember this: I prefer TypeScript with Tailwind v4"`) to manually store an instruction.
   - Say `"forget this: [topic]"` to remove matching memories.
