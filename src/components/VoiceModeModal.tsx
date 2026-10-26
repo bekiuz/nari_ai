@@ -14,7 +14,7 @@ import {
   Square,
   MessageSquare,
 } from 'lucide-react';
-import { ZuxrashLogo } from './ZuxrashLogo';
+import { NariLogo } from './NariLogo';
 import { GeminiVoiceName, Memory, Conversation } from '../types/chat';
 import { liveVoiceService, LiveVoiceState } from '../services/liveVoiceService';
 
@@ -185,7 +185,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
       <header className="relative z-10 flex items-center justify-between px-4 sm:px-6 py-4 border-b border-purple-900/20 bg-[#08050e]/70 backdrop-blur-xl">
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
-            <ZuxrashLogo size={28} />
+            <NariLogo size={28} />
             <span className="font-semibold text-sm tracking-tight text-white">Nari AI Voice</span>
           </div>
           <div className="h-4 w-px bg-purple-800/40 hidden sm:block" />
@@ -348,7 +348,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
                 : 'shadow-md ring-1 ring-purple-900/30'
             } bg-[#0c0716]/90 backdrop-blur-xl`}
           >
-            <ZuxrashLogo size={90} withGlow={state === 'speaking' || state === 'listening'} />
+            <NariLogo size={90} withGlow={state === 'speaking' || state === 'listening'} />
           </div>
         </div>
 
