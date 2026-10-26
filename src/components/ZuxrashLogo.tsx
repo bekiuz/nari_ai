@@ -48,7 +48,7 @@ export const ZuxrashLogo: React.FC<ZuxrashLogoProps> = ({
           xmlns="http://www.w3.org/2000/svg"
           className="w-full h-full drop-shadow-sm"
           role="img"
-          aria-label="Zuxrash logo"
+          aria-label="Nari AI logo"
         >
           <defs>
             <linearGradient id={gradMain} x1="14" y1="14" x2="50" y2="52" gradientUnits="userSpaceOnUse">
@@ -95,7 +95,7 @@ export const ZuxrashLogo: React.FC<ZuxrashLogoProps> = ({
 
           {/* Main Z ribbon */}
           <path
-            d="M17 17.5H46.5C48.8 17.5 50 20.4 48.3 22.1L21.4 43.5C20 44.7 20.8 46.5 22.7 46.5H47"
+            d="M8 32C14 20.5 22 14 32 14C42 14 50 20.5 56 32C50 43.5 42 50 32 50C22 50 14 43.5 8 32Z"
             stroke={`url(#${gradMain})`}
             strokeWidth="8"
             strokeLinecap="round"
@@ -104,7 +104,7 @@ export const ZuxrashLogo: React.FC<ZuxrashLogoProps> = ({
 
           {/* Inner light path */}
           <path
-            d="M17.5 17.5H44.5L20 46.5"
+            d="M14 32C19 24.5 25 21 32 21C39 21 45 24.5 50 32C45 39.5 39 43 32 43C25 43 19 39.5 14 32Z"
             stroke={`url(#${gradHighlight})`}
             strokeWidth="2.1"
             strokeLinecap="round"
@@ -114,14 +114,14 @@ export const ZuxrashLogo: React.FC<ZuxrashLogoProps> = ({
 
           {/* Precision accent */}
           <path
-            d="M24 34.5L32 28"
+            d="M26 32C26 28.7 28.7 26 32 26"
             stroke="#ffffff"
             strokeWidth="1.7"
             strokeLinecap="round"
             opacity="0.82"
           />
-          <circle cx="32" cy="28" r="2.1" fill="#ffffff" opacity="0.95" />
-          <circle cx="32" cy="28" r="4.6" fill="#f472b6" opacity="0.22" />
+          <circle cx="32" cy="32" r="2.1" fill="#ffffff" opacity="0.95" />
+          <circle cx="32" cy="32" r="4.6" fill="#f472b6" opacity="0.22" />
         </svg>
       </div>
 
@@ -129,7 +129,7 @@ export const ZuxrashLogo: React.FC<ZuxrashLogoProps> = ({
         <div className={`flex flex-col min-w-0 ${wordmarkClassName}`}>
           <div className="flex items-center gap-1.5 leading-none">
             <span className="font-semibold tracking-tight text-white text-[15px] sm:text-base">
-              Zuxrash
+              Nari
             </span>
             <span className="font-bold tracking-wider bg-gradient-to-r from-purple-400 via-pink-400 to-rose-400 bg-clip-text text-transparent text-[14px] sm:text-[15px]">
               AI
