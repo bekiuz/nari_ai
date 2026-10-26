@@ -186,7 +186,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
         <div className="flex items-center gap-3">
           <div className="flex items-center gap-2">
             <ZuxrashLogo size={28} />
-            <span className="font-semibold text-sm tracking-tight text-white">Zuxrash Voice</span>
+            <span className="font-semibold text-sm tracking-tight text-white">Nari AI Voice</span>
           </div>
           <div className="h-4 w-px bg-purple-800/40 hidden sm:block" />
           <span className="text-xs text-slate-400 font-mono truncate max-w-[180px] sm:max-w-xs hidden sm:inline">
@@ -259,7 +259,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
           {state === 'speaking' && (
             <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-pink-500/15 border border-pink-500/30 text-pink-300 text-xs font-medium animate-pulse">
               <span className="w-2 h-2 rounded-full bg-pink-400 animate-ping" />
-              <span>Zuxrash is speaking</span>
+              <span>Nari AI is speaking</span>
             </div>
           )}
 
@@ -309,7 +309,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
           )}
         </div>
 
-        {/* Center: Glowing Responsive Zuxrash Logo */}
+        {/* Center: Glowing Responsive Nari AI Logo */}
         <div className="relative my-auto flex items-center justify-center py-6">
           {/* Dynamic Audio Waves Ring */}
           <div
@@ -361,7 +361,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
             {recentTurns.length === 0 && !liveUserText && !liveModelText && (
               <div className="h-full flex flex-col items-center justify-center text-slate-500 text-center space-y-1">
                 <Sparkles className="w-4 h-4 text-purple-400/60" />
-                <p>Speak naturally. Zuxrash is listening in real time.</p>
+                <p>Speak naturally. Nari AI is listening in real time.</p>
                 <p className="text-[10px] text-slate-600">You can interrupt anytime by speaking.</p>
               </div>
             )}
@@ -379,7 +379,7 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
                   }`}
                 >
                   <span className="text-[9px] font-mono uppercase tracking-wider block mb-0.5 opacity-60">
-                    {turn.role === 'user' ? 'You' : 'Zuxrash'}
+                    {turn.role === 'user' ? 'You' : 'Nari AI'}
                   </span>
                   {turn.text}
                 </div>
@@ -398,12 +398,12 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
               </div>
             )}
 
-            {/* In-progress Zuxrash Spoken Text */}
+            {/* In-progress Nari AI Spoken Text */}
             {liveModelText && (
               <div className="flex justify-start">
                 <div className="px-3 py-1.5 rounded-xl max-w-[85%] bg-[#1a0f30] text-pink-200 border border-pink-500/40">
                   <span className="text-[9px] font-mono uppercase tracking-wider block mb-0.5 text-pink-400">
-                    Zuxrash speaking...
+                    Nari AI speaking...
                   </span>
                   {liveModelText}
                 </div>
@@ -428,12 +428,12 @@ export const VoiceModeModal: React.FC<VoiceModeModalProps> = ({
             {isMuted ? <MicOff className="w-5 h-5 sm:w-6 sm:h-6" /> : <Mic className="w-5 h-5 sm:w-6 sm:h-6" />}
           </button>
 
-          {/* Interrupt Speaking Button (Visible when Zuxrash is speaking) */}
+          {/* Interrupt Speaking Button (Visible when Nari AI is speaking) */}
           {state === 'speaking' && (
             <button
               onClick={handleInterrupt}
               className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-purple-950/80 hover:bg-purple-900 border border-purple-600/60 text-purple-200 flex items-center justify-center transition-all cursor-pointer shadow-lg animate-pulse"
-              title="Stop Zuxrash from speaking"
+              title="Stop Nari AI from speaking"
               aria-label="Interrupt speech"
             >
               <Square className="w-5 h-5 fill-current" />
