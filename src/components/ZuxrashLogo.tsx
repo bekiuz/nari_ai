@@ -10,8 +10,8 @@ interface ZuxrashLogoProps {
 }
 
 /**
- * Zuxrash Brand Mark:
- * Premium abstract "Z" monogram with layered light paths on an obsidian glass plate.
+ * Nari AI Brand Mark:
+ * Neon eye mark with layered violet-pink light paths on an obsidian glass plate.
  * The component name is kept stable for backwards compatibility with existing imports.
  */
 export const ZuxrashLogo: React.FC<ZuxrashLogoProps> = ({
