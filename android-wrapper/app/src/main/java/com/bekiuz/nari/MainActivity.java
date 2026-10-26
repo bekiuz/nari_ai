@@ -190,7 +190,7 @@ public class MainActivity extends Activity {
         String html = "<html><body style='margin:0;background:#07050f;color:#f8fafc;font-family:sans-serif;display:flex;min-height:100vh;align-items:center;justify-content:center;text-align:center'>"
                 + "<div style='padding:28px'><div style='font-size:28px;font-weight:700'>Nari <span style='color:#e879f9'>AI</span></div>"
                 + "<p style='color:#cbd5e1'>Ulanishda muammo bo‘ldi. Internetni tekshirib, qayta urinib ko‘ring.</p>"
-                + "<button onclick='location.reload()' style='background:#a855f7;color:white;border:0;border-radius:12px;padding:12px 20px;font-size:15px'>Qayta urinish</button></div>"
+                + "<button onclick=\"window.location.href='https://nari-ai.ai.studio/'\" style='background:#a855f7;color:white;border:0;border-radius:12px;padding:12px 20px;font-size:15px'>Qayta urinish</button></div>"
                 + "</body></html>";
         webView.loadDataWithBaseURL(null, html, "text/html", "UTF-8", null);
     }
