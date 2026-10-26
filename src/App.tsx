@@ -57,7 +57,7 @@ import {
   saveCloudUserSettings,
 } from './services/settingsService';
 import { DEFAULT_SETTINGS } from './utils/storage';
-import { ZuxrashLogo } from './components/ZuxrashLogo';
+import { NariLogo } from './components/NariLogo';
 import { liveVoiceService } from './services/liveVoiceService';
 
 export default function App() {
@@ -857,7 +857,7 @@ export default function App() {
     return (
       <div className="flex h-screen w-screen items-center justify-center bg-[#06040b] text-white">
         <div className="flex flex-col items-center gap-4">
-          <ZuxrashLogo size={64} withGlow />
+          <NariLogo size={64} withGlow />
           <span className="text-xs font-mono text-pink-300 tracking-wider">Connecting to Nari AI Cloud...</span>
         </div>
       </div>
