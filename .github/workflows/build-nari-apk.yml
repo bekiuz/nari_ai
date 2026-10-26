@@ -5,6 +5,10 @@ on:
     paths:
       - 'android-wrapper/**'
       - '.github/workflows/build-nari-apk.yml'
+  pull_request:
+    paths:
+      - 'android-wrapper/**'
+      - '.github/workflows/build-nari-apk.yml'
   workflow_dispatch:
 
 permissions:
