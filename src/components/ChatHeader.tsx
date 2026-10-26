@@ -9,7 +9,7 @@ import {
   Plus,
 } from 'lucide-react';
 import { Conversation } from '../types/chat';
-import { ZuxrashLogo } from './ZuxrashLogo';
+import { NariLogo } from './NariLogo';
 
 interface ChatHeaderProps {
   chat: Conversation | null;
@@ -88,7 +88,7 @@ export const ChatHeader: React.FC<ChatHeaderProps> = ({
 
         {/* Mobile Brand Mark */}
         <div className="lg:hidden shrink-0">
-          <ZuxrashLogo size={24} />
+          <NariLogo size={24} />
         </div>
 
         {/* Title & Edit */}
