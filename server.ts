@@ -6,6 +6,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { createVerify } from 'crypto';
+import { validateFirebaseTokenClaims, type FirebaseTokenClaims } from './firebase-token-claims.ts';
 import { GoogleGenAI, Type, Modality } from '@google/genai';
 
 dotenv.config();
@@ -71,13 +72,7 @@ function getGenAIClient(): GoogleGenAI {
 }
 
 // Token verification helper
-type FirebaseTokenPayload = {
-  aud?: string;
-  exp?: number;
-  iat?: number;
-  iss?: string;
-  sub?: string;
-  user_id?: string;
+type FirebaseTokenPayload = FirebaseTokenClaims & {
   email?: string;
 };
 
@@ -144,11 +139,7 @@ async function verifyToken(token: string): Promise<{ uid: string; email?: string
     const projectId = getFirebaseProjectId();
     const now = Math.floor(Date.now() / 1000);
 
-    if (!payload.sub || payload.sub.length > 128) return null;
-    if (!payload.aud || payload.aud !== projectId) return null;
-    if (!payload.iss || payload.iss !== `https://securetoken.google.com/${projectId}`) return null;
-    if (!payload.exp || payload.exp <= now) return null;
-    if (!payload.iat || payload.iat > now + 300) return null;
+    if (!validateFirebaseTokenClaims(payload, projectId, now)) return null;
 
     let keys = await getGoogleCertificateKeys();
     let certificate = keys[header.kid];
@@ -169,7 +160,7 @@ async function verifyToken(token: string): Promise<{ uid: string; email?: string
     if (!verifier.verify(certificate, signature)) return null;
 
     return {
-      uid: payload.user_id || payload.sub,
+      uid: payload.sub,
       email: payload.email,
     };
   } catch {
