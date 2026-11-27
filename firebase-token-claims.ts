@@ -14,6 +14,7 @@ export type ValidFirebaseTokenClaims = FirebaseTokenClaims & {
   iss: string;
   sub: string;
   auth_time: number;
+  email?: unknown;
 };
 
 /**
