@@ -11,11 +11,20 @@ export type FirebaseTokenClaims = {
  * Validate the standard claims required on Firebase Authentication ID tokens.
  * Signature verification is performed separately by the caller.
  */
+export type ValidFirebaseTokenClaims = FirebaseTokenClaims & {
+  aud: string;
+  exp: number;
+  iat: number;
+  iss: string;
+  sub: string;
+  auth_time: number;
+};
+
 export function validateFirebaseTokenClaims(
   payload: FirebaseTokenClaims,
   projectId: string,
   nowSeconds: number = Math.floor(Date.now() / 1000),
-): boolean {
+): payload is ValidFirebaseTokenClaims {
   if (!projectId || !Number.isSafeInteger(nowSeconds)) return false;
 
   if (payload.aud !== projectId) return false;
