@@ -48,7 +48,7 @@ async function getGoogleCertificates(forceRefresh = false): Promise<Record<strin
 
   const certificates = body as Record<string, string>;
   const cacheControl = response.headers.get('cache-control') || '';
-  const maxAge = cacheControl.match(/max-age=(\\d+)/i);
+  const maxAge = cacheControl.match(/max-age=(\d+)/i);
   const maxAgeSeconds = maxAge ? Number(maxAge[1]) : 3600;
 
   certificateCache = {
