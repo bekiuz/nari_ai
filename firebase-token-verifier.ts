@@ -35,6 +35,7 @@ async function getGoogleCertificates(forceRefresh = false): Promise<Record<strin
 
   const response = await fetch(
     'https://www.googleapis.com/robot/v1/metadata/x509/securetoken@system.gserviceaccount.com',
+    { signal: AbortSignal.timeout(10_000) },
   );
   if (!response.ok) {
     throw new Error(`Google certificate request failed with HTTP ${response.status}.`);
@@ -47,7 +48,7 @@ async function getGoogleCertificates(forceRefresh = false): Promise<Record<strin
 
   const certificates = body as Record<string, string>;
   const cacheControl = response.headers.get('cache-control') || '';
-  const maxAge = cacheControl.match(/max-age=(\d+)/i);
+  const maxAge = cacheControl.match(/max-age=(\\d+)/i);
   const maxAgeSeconds = maxAge ? Number(maxAge[1]) : 3600;
 
   certificateCache = {
