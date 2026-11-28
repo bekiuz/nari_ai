@@ -3,7 +3,7 @@ import { generateKeyPairSync, sign } from 'node:crypto';
 import test from 'node:test';
 import { verifyFirebaseIdToken } from '../firebase-token-verifier.ts';
 
-test('verifies a signed Firebase ID token and rejects a tampered payload', async (t) => {
+test('verifies signed Firebase ID tokens, rejects tampering, and honors certificate cache expiry', async (t) => {
   const projectId = 'zuxrash-signature-test';
   const now = Math.floor(Date.now() / 1000);
   const { privateKey, publicKey } = generateKeyPairSync('rsa', {
@@ -11,6 +11,7 @@ test('verifies a signed Firebase ID token and rejects a tampered payload', async
   });
   const certificate = publicKey.export({ type: 'spki', format: 'pem' }).toString();
   const originalFetch = globalThis.fetch;
+  const originalDateNow = Date.now;
   let certificateRequests = 0;
 
   globalThis.fetch = async (_input, init) => {
@@ -20,12 +21,13 @@ test('verifies a signed Firebase ID token and rejects a tampered payload', async
       status: 200,
       headers: {
         'content-type': 'application/json',
-        'cache-control': 'public, max-age=3600',
+        'cache-control': 'public, max-age=60',
       },
     });
   };
   t.after(() => {
     globalThis.fetch = originalFetch;
+    Date.now = originalDateNow;
   });
 
   const header = Buffer.from(JSON.stringify({
@@ -68,4 +70,11 @@ test('verifies a signed Firebase ID token and rejects a tampered payload', async
     await verifyFirebaseIdToken(`${invalidAlgorithmHeader}.${encodedPayload}.${signature}`, projectId),
     null,
   );
+
+  Date.now = () => originalDateNow() + 61_000;
+  assert.deepEqual(await verifyFirebaseIdToken(validToken, projectId), {
+    uid: 'test-user-123',
+    email: 'test@example.com',
+  });
+  assert.equal(certificateRequests, 2, 'expired certificate cache should be refreshed');
 });
