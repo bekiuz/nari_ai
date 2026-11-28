@@ -6,6 +6,7 @@ import path from 'path';
 import fs from 'fs';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI, Type, Modality } from '@google/genai';
+import { verifyFirebaseIdToken } from './firebase-token-verifier.ts';
 
 dotenv.config();
 
@@ -45,45 +46,36 @@ function getGenAIClient(): GoogleGenAI {
 }
 
 // Token verification helper
-function verifyToken(token: string): { uid: string; email?: string } | null {
-  if (!token) return null;
-  try {
-    const parts = token.split('.');
-    if (parts.length !== 3) return null;
+function getFirebaseProjectId(): string | null {
+  const projectId = firebaseConfig.projectId || process.env.GOOGLE_CLOUD_PROJECT;
+  return typeof projectId === 'string' && projectId.trim() ? projectId.trim() : null;
+}
 
-    const payload = JSON.parse(Buffer.from(parts[1], 'base64').toString('utf8'));
-    const now = Math.floor(Date.now() / 1000);
-
-    if (payload.exp && payload.exp < now) return null;
-    if (firebaseConfig.projectId && payload.aud && payload.aud !== firebaseConfig.projectId) return null;
-
-    const uid = payload.user_id || payload.sub;
-    if (!uid) return null;
-
-    return {
-      uid,
-      email: payload.email,
-    };
-  } catch {
-    return null;
-  }
+async function verifyToken(token: string): Promise<{ uid: string; email?: string } | null> {
+  const projectId = getFirebaseProjectId();
+  if (!projectId) return null;
+  return verifyFirebaseIdToken(token, projectId);
 }
 
 // Authentication token verification middleware
-function requireAuth(req: Request, res: Response, next: NextFunction) {
-  const authHeader = req.headers.authorization;
-  if (!authHeader || !authHeader.startsWith('Bearer ')) {
-    return res.status(401).json({ error: 'Unauthorized: Missing or invalid authentication token.' });
-  }
+async function requireAuth(req: Request, res: Response, next: NextFunction) {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+      return res.status(401).json({ error: 'Unauthorized: Missing or invalid authentication token.' });
+    }
 
-  const token = authHeader.split('Bearer ')[1].trim();
-  const user = verifyToken(token);
-  if (!user) {
+    const token = authHeader.slice('Bearer '.length).trim();
+    const user = await verifyToken(token);
+    if (!user) {
+      return res.status(401).json({ error: 'Unauthorized: Invalid or expired authentication token.' });
+    }
+
+    (req as any).user = user;
+    return next();
+  } catch {
     return res.status(401).json({ error: 'Unauthorized: Invalid or expired authentication token.' });
   }
-
-  (req as any).user = user;
-  next();
 }
 
 // Model list endpoint
@@ -736,7 +728,7 @@ function setupLiveWebSocketServer(httpServer: http.Server) {
         const msg = JSON.parse(raw.toString());
 
         if (msg.type === 'init') {
-          const authUser = verifyToken(msg.token);
+          const authUser = await verifyToken(msg.token);
           if (!authUser) {
             clientWs.send(JSON.stringify({ type: 'error', error: 'Authentication failed. Please sign in again.' }));
             return clientWs.close(4001, 'Unauthorized');

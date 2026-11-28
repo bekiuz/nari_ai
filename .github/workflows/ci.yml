@@ -27,5 +27,8 @@ jobs:
       - name: TypeScript check
         run: bun run lint
 
+      - name: Firebase token claim tests
+        run: bun run test
+
       - name: Production build
         run: bun run build
