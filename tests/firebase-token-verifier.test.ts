@@ -13,8 +13,9 @@ test('verifies a signed Firebase ID token and rejects a tampered payload', async
   const originalFetch = globalThis.fetch;
   let certificateRequests = 0;
 
-  globalThis.fetch = async () => {
+  globalThis.fetch = async (_input, init) => {
     certificateRequests += 1;
+    assert.ok(init?.signal instanceof AbortSignal, 'certificate lookup must have an abort signal');
     return new Response(JSON.stringify({ 'test-key': certificate }), {
       status: 200,
       headers: {
